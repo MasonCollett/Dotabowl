@@ -1,0 +1,104 @@
+/* General container */
+.add-match-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Form row layout */
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Mat fields */
+.form-field {
+  flex: 0 1 150px;
+  max-width: 180px;
+}
+
+.form-field-small {
+  flex: 0 1 60px;
+  max-width: 70px;
+}
+
+/* Match length styling */
+.match-length {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.colon {
+  font-weight: bold;
+}
+
+/* Add button */
+button {
+  flex: 0 0 auto;
+  height: 56px;
+}
+
+/* Player lists row */
+.players-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+/* Individual player container */
+.players-container {
+  flex: 1 1 300px;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.scrollable-list {
+  max-height: 250px;
+  overflow-y: auto;
+  overflow-x: hidden; /* no horizontal scroll */
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  border-radius: 4px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.player-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.disabled {
+  color: gray;
+}
+
+/* Scrollbar styling */
+.scrollable-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable-list::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.3);
+  border-radius: 4px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  .players-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .scrollable-list {
+    max-height: 50vh;
+  }
+}

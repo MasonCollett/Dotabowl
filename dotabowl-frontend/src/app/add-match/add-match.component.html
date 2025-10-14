@@ -1,0 +1,82 @@
+<div class="add-match-container">
+
+  <h3>Add Match</h3>
+
+  <!-- Form row -->
+  <div class="form-row">
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label>Match Type</mat-label>
+      <mat-select [(ngModel)]="type">
+        <mat-option *ngFor="let option of typeOptions" [value]="option">{{ option }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label>Winner</mat-label>
+      <mat-select [(ngModel)]="winner">
+        <mat-option *ngFor="let option of winnerOptions" [value]="option">{{ option }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="match-length">
+      <mat-form-field class="form-field-small" floatLabel="always" appearance="outline">
+        <mat-label>Minutes</mat-label>
+        <input matInput type="number" [(ngModel)]="minutes" min="0" max="250">
+      </mat-form-field>
+      <span class="colon">:</span>
+      <mat-form-field class="form-field-small" floatLabel="always" appearance="outline">
+        <mat-label>Seconds</mat-label>
+        <input matInput type="number" [(ngModel)]="seconds" min="0" max="59">
+      </mat-form-field>
+    </div>
+
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label>Radiant Kills</mat-label>
+      <input matInput type="number" [(ngModel)]="radiantKills">
+    </mat-form-field>
+
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label>Dire Kills</mat-label>
+      <input matInput type="number" [(ngModel)]="direKills">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="addMatch()">Add Match</button>
+  </div>
+
+  <!-- Player lists side by side on desktop -->
+  <div class="players-row">
+    <!-- Radiant -->
+    <div class="players-container">
+      <h4>Radiant Players</h4>
+      <div class="scrollable-list">
+        <div *ngFor="let player of players" class="player-item">
+          <input 
+            type="checkbox"
+            [value]="player.id"
+            (change)="onRadiantChange($event, player.id)"
+            [checked]="radiantPlayerIds.includes(player.id)"
+            [disabled]="(!radiantPlayerIds.includes(player.id) && radiantPlayerIds.length >= 5) || direPlayerIds.includes(player.id)"
+          />
+          <span [class.disabled]="direPlayerIds.includes(player.id)">{{ player.name }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dire -->
+    <div class="players-container">
+      <h4>Dire Players</h4>
+      <div class="scrollable-list">
+        <div *ngFor="let player of players" class="player-item">
+          <input 
+            type="checkbox"
+            [value]="player.id"
+            (change)="onDireChange($event, player.id)"
+            [checked]="direPlayerIds.includes(player.id)"
+            [disabled]="(!direPlayerIds.includes(player.id) && direPlayerIds.length >= 5) || radiantPlayerIds.includes(player.id)"
+          />
+          <span [class.disabled]="radiantPlayerIds.includes(player.id)">{{ player.name }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
