@@ -1,21 +1,21 @@
-
 <app-add-match></app-add-match>
 
 <h2>Match History</h2>
 
-<div *ngIf="matches.length === 0">
+<div *ngIf="matches?.length === 0">
   No matches yet.
 </div>
 
 <div *ngFor="let match of matches">
   <span>
-      {{ match.date | date:'MMM d, y, h:mm a'}} | 
-      Type: {{ match.type }} | 
-      Radiant Players: {{ getRadiantNames(match) }} |
-      {{ match.radiantKills}} - {{match.direKills}} |
-      Dire Players: {{ getDireNames(match) }} |
-      Winner: {{ match.winner }} |
-      Length: {{ match.length}}
-    </span>
+    {{ match.date | date:'MMM d, y, h:mm a' }} | 
+    Type: {{ match.type }} | 
+    Radiant Players: {{ getRadiantNames(match) }} |
+    {{ match.radiantKills }} - {{ match.direKills }} |
+    Dire Players: {{ getDireNames(match) }} |
+    Winner: {{ match.winner }} |
+    Length: {{ match.length }}
+  </span>
   <hr />
 </div>
+

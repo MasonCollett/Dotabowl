@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { MatchService, Match } from '../services/match-service/match-service';
 import { HttpClient } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -20,6 +20,9 @@ import { MatSelectModule } from '@angular/material/select';
   styleUrl: './add-match.component.css',
 })
 export class AddMatchComponent {
+  @ViewChild('matchForm') matchForm!: NgForm; 
+  clicked = false;
+  showToast = false;
   type = '';
   winner = '';
   date = '';
@@ -42,7 +45,7 @@ export class AddMatchComponent {
   radiantPlayerIds: number[] = [];
   direPlayerIds: number[] = [];
 
-  constructor(private matchservice: MatchService, private http: HttpClient) {}
+  constructor(private matchesService: MatchService, private http: HttpClient) {}
 
   ngOnInit() {
     this.http.get<any[]>('/api/players').subscribe({
@@ -52,41 +55,35 @@ export class AddMatchComponent {
   }
 
 
+  addMatch(form: NgForm) {
+    if (form.invalid) {
+      form.control.markAllAsTouched(); 
+      return;
+    }
 
-  addMatch() {
-    const radiantIds = [...this.radiantPlayerIds];
-    const direIds = [...this.direPlayerIds];    
-
-    let participants = [
+    const participants = [
       ...this.radiantPlayerIds.map(id => ({ playerId: id, team: 'Radiant', isWinner: this.winner === 'Radiant' })),
       ...this.direPlayerIds.map(id => ({ playerId: id, team: 'Dire', isWinner: this.winner === 'Dire' }))
-    ];
-    
-    participants = participants.filter(
-      (p, index, self) => index === self.findIndex((t) => t.playerId === p.playerId)
-    );
+    ].filter((p, index, self) => index === self.findIndex(t => t.playerId === p.playerId));
 
     const newMatch: Match = {
-      length: this.matchLength,
+      length: this.matchLength, // or calculate from minutes/seconds
       type: this.type,
       winner: this.winner,
       radiantKills: this.radiantKills ?? 0,
-
       direKills: this.direKills ?? 0,
       date: new Date().toISOString(),
       participants
     };
 
-    this.matchservice.addMatch(newMatch);
-    this.length = '';
-    this.radiantKills = null;
-    this.direKills = null;
-    this.type = '';
-    this.winner = '';
-    this.date = '';
+    this.matchesService.addMatch(newMatch);
+    this.showSuccessPopup();
+
+    form.resetForm();
     this.radiantPlayerIds = [];
     this.direPlayerIds = [];
-  }
+  };
+
 
   onRadiantChange(event: any, playerId: number) {
     if (event.target.checked) {
@@ -96,6 +93,16 @@ export class AddMatchComponent {
     } else {
       this.radiantPlayerIds = this.radiantPlayerIds.filter(id => id !== playerId);
     }
+  }
+
+
+  showSuccessPopup() {
+    this.showToast = true;
+
+    // Hide automatically after 3 seconds
+    setTimeout(() => {
+      this.showToast = false;
+    }, 3000);
   }
 
   onDireChange(event: any, playerId: number) {

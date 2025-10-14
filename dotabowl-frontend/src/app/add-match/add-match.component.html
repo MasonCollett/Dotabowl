@@ -2,81 +2,214 @@
 
   <h3>Add Match</h3>
 
-  <!-- Form row -->
-  <div class="form-row">
-    <mat-form-field class="form-field" appearance="outline">
-      <mat-label>Match Type</mat-label>
-      <mat-select [(ngModel)]="type">
-        <mat-option *ngFor="let option of typeOptions" [value]="option">{{ option }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+  <form #matchForm="ngForm" (ngSubmit)="addMatch(matchForm)" novalidate>    <div class="container">
+      <div class="row">
+            <!-- Match Type -->
+            <div class="form-floating mb-3 col-2">
+              <select 
+                class="form-select" 
+                id="matchTypeSelect" 
+                [(ngModel)]="type" 
+                name="type" 
+                required
+                #typeInput="ngModel"
+                placeholder="Match Type"
+                [class.is-invalid]="typeInput.invalid && typeInput.touched"
+              >
+                <option *ngFor="let option of typeOptions" [value]="option">{{ option }}</option>
+              </select>
+              <label for="matchTypeSelect">Match Type</label>
+              <div class="invalid-feedback">Match Type is required.</div>
+            </div>
 
-    <mat-form-field class="form-field" appearance="outline">
-      <mat-label>Winner</mat-label>
-      <mat-select [(ngModel)]="winner">
-        <mat-option *ngFor="let option of winnerOptions" [value]="option">{{ option }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+            <!-- Winner -->
+            <div class="form-floating mb-3 col-2">
+              <select 
+                class="form-select" 
+                id="winnerSelect" 
+                [(ngModel)]="winner" 
+                name="winner" 
+                required
+                #winnerInput="ngModel"
+                [class.is-invalid]="winnerInput.invalid && winnerInput.touched"
+              >
+                <option *ngFor="let option of winnerOptions" [value]="option">{{ option }}</option>
+              </select>
+              <label for="winnerSelect">Winner</label>
+              <div class="invalid-feedback">Winner is required.</div>
+            </div>
 
-    <div class="match-length">
-      <mat-form-field class="form-field-small" floatLabel="always" appearance="outline">
-        <mat-label>Minutes</mat-label>
-        <input matInput type="number" [(ngModel)]="minutes" min="0" max="250">
-      </mat-form-field>
-      <span class="colon">:</span>
-      <mat-form-field class="form-field-small" floatLabel="always" appearance="outline">
-        <mat-label>Seconds</mat-label>
-        <input matInput type="number" [(ngModel)]="seconds" min="0" max="59">
-      </mat-form-field>
-    </div>
+            <!-- Match Length -->
+            <div class = "col-3">
+              <div class="row align-items-center">
 
-    <mat-form-field class="form-field" appearance="outline">
-      <mat-label>Radiant Kills</mat-label>
-      <input matInput type="number" [(ngModel)]="radiantKills">
-    </mat-form-field>
+                <!-- Minutes -->
+                <div class="col-5">
+                  <div class="form-floating">
+                    <input 
+                      type="number" 
+                      class="form-control" 
+                      id="minutesInput" 
+                      [(ngModel)]="minutes" 
+                      name="minutes" 
+                      min="0" max="250" 
+                      placeholder="MM"
+                      required
+                      #minutesInputRef="ngModel"
+                      [class.is-invalid]="minutesInputRef.invalid && (minutesInputRef.touched || matchForm.submitted)"
+                    >
+                    <label for="minutesInput">MM</label>
+                    <div class="invalid-feedback">Minutes is required.</div>
+                  </div>
+                </div>
 
-    <mat-form-field class="form-field" appearance="outline">
-      <mat-label>Dire Kills</mat-label>
-      <input matInput type="number" [(ngModel)]="direKills">
-    </mat-form-field>
+                <!-- Colon -->
+                <div class="col-1 align-items-center">
+                  <span class="fs-4">:</span>
+                </div>
 
-    <button mat-raised-button color="primary" (click)="addMatch()">Add Match</button>
-  </div>
+                <!-- Seconds -->
+                <div class="col-5">
+                  <div class="form-floating">
+                    <input 
+                      type="number" 
+                      class="form-control" 
+                      id="secondsInput" 
+                      [(ngModel)]="seconds" 
+                      name="seconds" 
+                      min="0" max="59" 
+                      placeholder="SS"
+                      required
+                      #secondsInputRef="ngModel"
+                      [class.is-invalid]="secondsInputRef.invalid && secondsInputRef.touched"
+                    >
+                    <label for="secondsInput">SS</label>
+                    <div class="invalid-feedback">Seconds is required.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-  <!-- Player lists side by side on desktop -->
-  <div class="players-row">
-    <!-- Radiant -->
-    <div class="players-container">
-      <h4>Radiant Players</h4>
-      <div class="scrollable-list">
-        <div *ngFor="let player of players" class="player-item">
-          <input 
-            type="checkbox"
-            [value]="player.id"
-            (change)="onRadiantChange($event, player.id)"
-            [checked]="radiantPlayerIds.includes(player.id)"
-            [disabled]="(!radiantPlayerIds.includes(player.id) && radiantPlayerIds.length >= 5) || direPlayerIds.includes(player.id)"
-          />
-          <span [class.disabled]="direPlayerIds.includes(player.id)">{{ player.name }}</span>
-        </div>
+            <!-- Match Score -->
+            <div class="col">
+            <div class="row align-items-center">
+              <!-- Radiant -->
+              <div class="col-auto">
+                <div class="form-floating">
+                  <input 
+                    type="number" 
+                    class="form-control" 
+                    [(ngModel)]="radiantKills" 
+                    name="radiantKills" 
+                    min="0" max="200" 
+                    placeholder="Radiant"
+                    required
+                    #radiantInput="ngModel"
+                    [class.is-invalid]="radiantInput.invalid && radiantInput.touched"
+                  >
+                  <label>Radiant</label>
+                  <div class="invalid-feedback">Radiant score is required.</div>
+                </div>
+              </div>
+
+              <div class="col-auto align-items-center">
+                <span class="fs-4">-</span>
+              </div>
+
+              <!-- Dire -->
+              <div class="col-auto">
+                <div class="form-floating">
+                  <input 
+                    type="number" 
+                    class="form-control" 
+                    [(ngModel)]="direKills" 
+                    name="direKills" 
+                    min="0" max="200" 
+                    placeholder="Dire"
+                    required
+                    #direInput="ngModel"
+                    [class.is-invalid]="direInput.invalid && direInput.touched"
+                  >
+                  <label>Dire</label>
+                  <div class="invalid-feedback">Dire score is required.</div>
+                </div>
+              </div>
+            </div>
+            </div>
+
+
+            <!-- Radiant Players -->
+            <div class="row">
+
+            <div class="col-md-6 mb-3">
+              <h5 class="mb-2">Radiant Players</h5>
+              <div class="border rounded p-2" style="max-height: 250px; overflow-y: auto;">
+                <div *ngFor="let player of players" class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    [id]="'radiant-' + player.id"
+                    [value]="player.id"
+                    (change)="onRadiantChange($event, player.id)"
+                    [checked]="radiantPlayerIds.includes(player.id)"
+                    [disabled]="(!radiantPlayerIds.includes(player.id) && radiantPlayerIds.length >= 5) || direPlayerIds.includes(player.id)"
+                  >
+                  <label class="form-check-label" [for]="'radiant-' + player.id" [class.text-muted]="direPlayerIds.includes(player.id)">
+                    {{ player.name }}
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dire Players -->
+            <div class="col-md-6 mb-3">
+              <h5 class="mb-2">Dire Players</h5>
+              <div class="border rounded p-2" style="max-height: 250px; overflow-y: auto;">
+                <div *ngFor="let player of players" class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    [id]="'dire-' + player.id"
+                    [value]="player.id"
+                    (change)="onDireChange($event, player.id)"
+                    [checked]="direPlayerIds.includes(player.id)"
+                    [disabled]="(!direPlayerIds.includes(player.id) && direPlayerIds.length >= 5) || radiantPlayerIds.includes(player.id)"
+                  >
+                  <label class="form-check-label" [for]="'dire-' + player.id" [class.text-muted]="radiantPlayerIds.includes(player.id)">
+                    {{ player.name }}
+                  </label>
+                </div>
+              </div>
+            </div>
+            </div>
+
+
+            <!-- Add Match Button -->
+            <div class="col-12 text-center mt-3">
+              <button 
+                type="submit" 
+                class="btn btn-primary px-4"
+                [class.btn-clicked]="clicked"
+                (mousedown)="clicked=true" 
+                (mouseup)="clicked=false"
+                (mouseleave)="clicked=false"
+              >
+                Add Match
+              </button>
+            </div>
       </div>
     </div>
+  </form>
+</div>
 
-    <!-- Dire -->
-    <div class="players-container">
-      <h4>Dire Players</h4>
-      <div class="scrollable-list">
-        <div *ngFor="let player of players" class="player-item">
-          <input 
-            type="checkbox"
-            [value]="player.id"
-            (change)="onDireChange($event, player.id)"
-            [checked]="direPlayerIds.includes(player.id)"
-            [disabled]="(!direPlayerIds.includes(player.id) && direPlayerIds.length >= 5) || radiantPlayerIds.includes(player.id)"
-          />
-          <span [class.disabled]="radiantPlayerIds.includes(player.id)">{{ player.name }}</span>
-        </div>
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+  <div class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true"
+       [class.show]="showToast" [class.hide]="!showToast">
+    <div class="d-flex">
+      <div class="toast-body">
+        Match added successfully!
       </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" (click)="showToast=false"></button>
     </div>
   </div>
 </div>
