@@ -48,7 +48,7 @@ export class MatchService {
     this.http.post<Match>(this.apiUrl, match).subscribe({
       next: addedMatch => {
         const current = this.matchesSubject.value;
-        this.matchesSubject.next([...current, addedMatch]);
+        this.matchesSubject.next([addedMatch, ...current]);
       },
       error: err => console.error('Failed to add match', err)
     });

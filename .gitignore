@@ -10,6 +10,9 @@
 *.userosscache
 *.sln.docstates
 
+/Dotabowl/Migrations
+/ClientApp
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 

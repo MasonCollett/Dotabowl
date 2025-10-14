@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Dotabowl.Api.Data
 {
+    // Add-Migration [name]
+    // Update-Database
+
     public class DotabowlContext : DbContext
     {
         public DotabowlContext(DbContextOptions<DotabowlContext> options) : base(options) { }

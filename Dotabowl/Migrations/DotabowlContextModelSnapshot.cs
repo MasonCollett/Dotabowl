@@ -30,37 +30,91 @@ namespace Dotabowl.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AdGames")
+                    b.Property<int>("ADARGames")
                         .HasColumnType("int");
 
-                    b.Property<int>("AdLosses")
+                    b.Property<int>("ADARLosses")
                         .HasColumnType("int");
 
-                    b.Property<int>("AdWins")
+                    b.Property<int>("ADARWins")
                         .HasColumnType("int");
 
-                    b.Property<int>("Games")
+                    b.Property<int>("AllPickGames")
                         .HasColumnType("int");
 
-                    b.Property<int>("Losses")
+                    b.Property<int>("AllPickLosses")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AllPickWins")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AllRandomGames")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AllRandomLosses")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AllRandomWins")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CaptDraftGames")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CaptDraftLosses")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CaptDraftWins")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("RandomDraftGames")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RandomDraftLosses")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RandomDraftWins")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SingleDraftGames")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SingleDraftLosses")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SingleDraftWins")
+                        .HasColumnType("int");
+
                     b.Property<string>("SteamName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal>("TotalGameTime")
+                        .HasColumnType("decimal(8,2)");
+
                     b.Property<int>("TotalGames")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalLosses")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalWins")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TurboGames")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TurboLosses")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TurboWins")
                         .HasColumnType("int");
 
                     b.Property<decimal>("WinRate")
                         .HasColumnType("decimal(5,2)");
-
-                    b.Property<int>("Wins")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

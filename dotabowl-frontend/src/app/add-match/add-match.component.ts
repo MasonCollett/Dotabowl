@@ -39,7 +39,7 @@ export class AddMatchComponent {
   }
 
   winnerOptions = ['Radiant', 'Dire'];
-  typeOptions = ['Ability Draft', 'All Pick', 'Captains Draft', 'Single Draft', 'Turbo']
+  typeOptions = ['Ability Draft', 'ADAR', 'All Pick', 'All Random', 'Captains Draft', 'Single Draft', 'Turbo']
 
   players: any[] = [];
   radiantPlayerIds: number[] = [];
@@ -66,13 +66,17 @@ export class AddMatchComponent {
       ...this.direPlayerIds.map(id => ({ playerId: id, team: 'Dire', isWinner: this.winner === 'Dire' }))
     ].filter((p, index, self) => index === self.findIndex(t => t.playerId === p.playerId));
 
+    const now = new Date();
+    const pad = (n: number) => n.toString().padStart(2, '0');
+    const localDateStr = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}T${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+
     const newMatch: Match = {
       length: this.matchLength, // or calculate from minutes/seconds
       type: this.type,
       winner: this.winner,
       radiantKills: this.radiantKills ?? 0,
       direKills: this.direKills ?? 0,
-      date: new Date().toISOString(),
+      date: localDateStr,
       participants
     };
 
