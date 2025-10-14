@@ -100,8 +100,6 @@ namespace Dotabowl.Controllers
             match.Participants ??= new List<MatchParticipant>();
             var matchTime = GetMatchTime(match);
 
-            var date = match.Date; 
-
             _context.Matches.Add(match);
 
             foreach (MatchParticipant participant in match.Participants)

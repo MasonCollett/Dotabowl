@@ -6,16 +6,28 @@
   No matches yet.
 </div>
 
-<div *ngFor="let match of matches">
-  <span>
-    {{ match.date | date:'MMM d, y, h:mm a' }} | 
-    Type: {{ match.type }} | 
-    Radiant Players: {{ getRadiantNames(match) }} |
-    {{ match.radiantKills }} - {{ match.direKills }} |
-    Dire Players: {{ getDireNames(match) }} |
-    Winner: {{ match.winner }} |
-    Length: {{ match.length }}
-  </span>
-  <hr />
-</div>
+<table class="table table-striped table-dark" id="matchHistory">
+  <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Mode</th>
+      <th scope="col">Radiant</th>
+      <th scope="col">Score</th>
+      <th scope="col">Dire</th>
+      <th scope="col">Winner</th>
+      <th scope="col">Game Length</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let match of matches">
+      <td>{{ match.date | date:'MMM d, y, h:mm a' }}</td>
+      <td [ngClass]="getTypeColor(match.type)">{{ match.type }}</td>      
+      <td>{{ getRadiantNames(match) }}</td>
+      <td>{{ match.radiantKills }} - {{ match.direKills }}</td>
+      <td>{{ getDireNames(match) }}</td>
+      <td  [ngClass]="getWinnerColor(match.winner)">{{ match.winner }}</td>
+      <td>{{ match.length }}</td>
+    </tr>
+  </tbody>
+</table>
 

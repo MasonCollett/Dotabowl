@@ -19,5 +19,5 @@ import { MatInputModule } from '@angular/material/input';
   styleUrls: ['./app.css']        
 })
 export class App {
-  protected readonly title = signal('dotabowl-frontend');
+  protected readonly title = signal('D O T A B O W L');
 }

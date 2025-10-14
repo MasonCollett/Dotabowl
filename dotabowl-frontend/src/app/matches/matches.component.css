@@ -1,0 +1,44 @@
+.list-group-item {
+  padding-top: 1rem;   /* half of default $spacer (0.5rem) */
+  padding-bottom: 1rem;
+}
+
+.match-type-white   { color: #FFFFFF; }
+.match-type-pink    { color: #FFB3BA; }
+.match-type-orange  { color: #FFDFBA; }
+.match-type-yellow  { color: #FFFFBA; }
+.match-type-green   { color: #BAFFC9; }
+.match-type-teal    { color: #BAE1FF; }
+.match-type-purple  { color: #E0BAFF; }
+.match-type-peach   { color: #FFD8BA; }
+.winner-radiant { color:lightgreen}
+.winner-dire { color:lightcoral}
+
+.match-type-rainbow {
+  font-weight: bold;
+  
+  background: linear-gradient(
+    90deg,
+    #ff8a8a,
+    #ffd68a,
+    #8aff8a,
+    #8affff,
+    #8a8aff,
+    #ff8aff,
+    #ff8a8a
+  );
+  background-size: 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent; 
+  animation: rainbowShift 6s linear infinite;
+}
+
+@keyframes rainbowShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}

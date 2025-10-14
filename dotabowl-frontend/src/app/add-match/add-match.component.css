@@ -3,3 +3,7 @@
   color: gray;
 }
 
+.list-group-item {
+  padding-top: .5rem;   /* half of default $spacer (0.5rem) */
+  padding-bottom: .5rem;
+}

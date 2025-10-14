@@ -5,22 +5,25 @@
   <form #matchForm="ngForm" (ngSubmit)="addMatch(matchForm)" novalidate>    <div class="container">
       <div class="row">
             <!-- Match Type -->
-            <div class="form-floating mb-3 col-2">
-              <select 
-                class="form-select" 
-                id="matchTypeSelect" 
-                [(ngModel)]="type" 
-                name="type" 
-                required
-                #typeInput="ngModel"
-                placeholder="Match Type"
-                [class.is-invalid]="typeInput.invalid && typeInput.touched"
-              >
-                <option *ngFor="let option of typeOptions" [value]="option">{{ option }}</option>
-              </select>
-              <label for="matchTypeSelect">Match Type</label>
-              <div class="invalid-feedback">Match Type is required.</div>
-            </div>
+          <div class="form-floating mb-3 col-2">
+            <select
+              class="form-select"
+              id="matchTypeSelect"
+              [(ngModel)]="type"
+              name="type"
+              required
+              #typeInput="ngModel"
+              [class.is-invalid]="typeInput.invalid && typeInput.touched"
+              aria-label="Match Type"
+            >
+              <option value="" disabled selected hidden>Select Match Type</option>
+              <option *ngFor="let option of typeOptions" [value]="option">
+                {{ option }}
+              </option>
+            </select>
+            <label for="matchTypeSelect">Match Type</label>
+            <div class="invalid-feedback">Match Type is required.</div>
+          </div>
 
             <!-- Winner -->
             <div class="form-floating mb-3 col-2">
@@ -40,7 +43,7 @@
             </div>
 
             <!-- Match Length -->
-            <div class = "col-3">
+            <div class = "col-3 mb-3">
               <div class="row align-items-center">
 
                 <!-- Minutes -->
@@ -91,7 +94,7 @@
             </div>
 
             <!-- Match Score -->
-            <div class="col">
+            <div class="col mb-3">
             <div class="row align-items-center">
               <!-- Radiant -->
               <div class="col-auto">
@@ -144,20 +147,20 @@
             <div class="col-md-6 mb-3">
               <h5 class="mb-2">Radiant Players</h5>
               <div class="border rounded p-2" style="max-height: 250px; overflow-y: auto;">
-                <div *ngFor="let player of players" class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    [id]="'radiant-' + player.id"
-                    [value]="player.id"
-                    (change)="onRadiantChange($event, player.id)"
-                    [checked]="radiantPlayerIds.includes(player.id)"
-                    [disabled]="(!radiantPlayerIds.includes(player.id) && radiantPlayerIds.length >= 5) || direPlayerIds.includes(player.id)"
-                  >
-                  <label class="form-check-label" [for]="'radiant-' + player.id" [class.text-muted]="direPlayerIds.includes(player.id)">
+                <ul class="list-group" *ngFor="let player of players">
+                  <label class="list-group-item" [for]="'radiant-' + player.id" [class.text-muted]="direPlayerIds.includes(player.id)">
+                    <input
+                      class="form-check-input me-1"
+                      type="checkbox"
+                      [id]="'radiant-' + player.id"
+                      [value]="player.id"
+                      (change)="onRadiantChange($event, player.id)"
+                      [checked]="radiantPlayerIds.includes(player.id)"
+                      [disabled]="(!radiantPlayerIds.includes(player.id) && radiantPlayerIds.length >= 5) || direPlayerIds.includes(player.id)"
+                    >
                     {{ player.name }}
                   </label>
-                </div>
+                </ul>
               </div>
             </div>
 
@@ -165,9 +168,10 @@
             <div class="col-md-6 mb-3">
               <h5 class="mb-2">Dire Players</h5>
               <div class="border rounded p-2" style="max-height: 250px; overflow-y: auto;">
-                <div *ngFor="let player of players" class="form-check">
+                <ul class="list-group" *ngFor="let player of players">
+                  <label class="list-group-item" [for]="'dire-' + player.id" [class.text-muted]="radiantPlayerIds.includes(player.id)">
                   <input
-                    class="form-check-input"
+                    class="form-check-input me-1"
                     type="checkbox"
                     [id]="'dire-' + player.id"
                     [value]="player.id"
@@ -175,10 +179,9 @@
                     [checked]="direPlayerIds.includes(player.id)"
                     [disabled]="(!direPlayerIds.includes(player.id) && direPlayerIds.length >= 5) || radiantPlayerIds.includes(player.id)"
                   >
-                  <label class="form-check-label" [for]="'dire-' + player.id" [class.text-muted]="radiantPlayerIds.includes(player.id)">
                     {{ player.name }}
                   </label>
-                </div>
+                </ul>
               </div>
             </div>
             </div>

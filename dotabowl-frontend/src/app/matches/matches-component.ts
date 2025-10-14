@@ -56,10 +56,34 @@ export class MatchesComponent implements OnInit {
   }
 
   getRadiantNames(match: Match): string {
-    return (match.radiantPlayers || []).map(p => p.playerName).join(', ');
+    return (match.radiantPlayers || []).map(p => p.playerName).sort().join(', ');
   }
 
   getDireNames(match: Match): string {
-    return (match.direPlayers || []).map(p => p.playerName).join(', ');
+    return (match.direPlayers || []).map(p => p.playerName).sort().join(', ');
+  }
+
+//   typeOptions = ['Ability Draft', 'ADAR', 'All Pick', 'All Random', 'Captains Draft', 'Single Draft', 'Turbo']
+
+  getTypeColor(type: string): string {
+    switch(type) {
+      case 'Ability Draft': return 'match-type-teal';
+      case 'ADAR': return 'match-type-green';
+      case 'All Pick': return 'match-type-yellow';
+      case 'All Random': return 'match-type-pink';
+      case 'Captains Draft': return 'match-type-orange';
+      case 'Single Draft': return 'match-type-purple';
+      case 'Turbo': return 'match-type-rainbow';
+      default: return 'match-type-white';
+    }
+  }
+
+    getWinnerColor(type: string): string {
+    switch(type) {
+      case 'Dire': return 'winner-dire';
+      case 'Radiant': return 'winner-radiant';
+
+      default: return 'match-type-white';
+    }
   }
 }
