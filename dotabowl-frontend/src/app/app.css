@@ -6,8 +6,17 @@
   display: flex;
   align-items: center;
   gap: 10px; /* optional: space between logo and text */
+  color: red;
 }
 
 .db-navbar img {
   display: block;
+}
+
+.navbar-color{
+    background-color:rgb(78, 1, 1);
+}
+
+.nav-link{
+    color: white;
 }
