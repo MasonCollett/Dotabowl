@@ -7,3 +7,7 @@
   padding-top: .5rem;   /* half of default $spacer (0.5rem) */
   padding-bottom: .5rem;
 }
+
+.add-match-title {
+  margin-top: 0.5rem;
+}

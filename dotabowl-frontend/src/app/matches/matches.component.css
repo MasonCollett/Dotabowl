@@ -3,16 +3,20 @@
   padding-bottom: 1rem;
 }
 
-.match-type-white   { color: #FFFFFF; }
-.match-type-pink    { color: #FFB3BA; }
-.match-type-orange  { color: #FFDFBA; }
-.match-type-yellow  { color: #FFFFBA; }
-.match-type-green   { color: #BAFFC9; }
-.match-type-teal    { color: #BAE1FF; }
-.match-type-purple  { color: #E0BAFF; }
-.match-type-peach   { color: #FFD8BA; }
-.winner-radiant { color:lightgreen}
-.winner-dire { color:lightcoral}
+.match-history-title{
+  margin: 0.5rem;
+}
+
+.match-type-white   { background-color: #FFFFFF; }
+.match-type-pink    { background-color: #FFB3BA; }
+.match-type-orange  { background-color: #FFDFBA; }
+.match-type-yellow  { background-color: #FFFFBA; }
+.match-type-green   { background-color: #BAFFC9; }
+.match-type-teal    { background-color: #BAE1FF; }
+.match-type-purple  { background-color: #E0BAFF; }
+.match-type-peach   { background-color: #FFD8BA; }
+.winner-radiant { color:green}
+.winner-dire { color:red}
 
 .match-type-rainbow {
   font-weight: bold;

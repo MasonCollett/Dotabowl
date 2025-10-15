@@ -1,11 +1,14 @@
-<div class="add-match-container">
+<div class="container-fluid">
 
-  <h3>Add Match</h3>
+  <h3 class="add-match-title">Add Match</h3>
 
   <form #matchForm="ngForm" (ngSubmit)="addMatch(matchForm)" novalidate>    <div class="container">
-      <div class="row">
+    <div class="container">
+
+ 
+    <div class="row align-items-end justify-content-center">
             <!-- Match Type -->
-          <div class="form-floating mb-3 col-2">
+          <div class="form-floating mb-3 col-xs-12 col-sm-12 col-md-6 col-lg-3">
             <select
               class="form-select"
               id="matchTypeSelect"
@@ -16,17 +19,16 @@
               [class.is-invalid]="typeInput.invalid && typeInput.touched"
               aria-label="Match Type"
             >
-              <option value="" disabled selected hidden>Select Match Type</option>
+              <option value="" disabled selected hidden>Select Mode</option>
               <option *ngFor="let option of typeOptions" [value]="option">
                 {{ option }}
               </option>
             </select>
-            <label for="matchTypeSelect">Match Type</label>
-            <div class="invalid-feedback">Match Type is required.</div>
+            <label for="matchTypeSelect" style="padding-left:1.5rem;">Mode</label>
           </div>
 
             <!-- Winner -->
-            <div class="form-floating mb-3 col-2">
+            <div class="form-floating mb-3 col-xs-12 col-sm-12 col-md-6 col-lg-2 col-xl-2">
               <select 
                 class="form-select" 
                 id="winnerSelect" 
@@ -38,13 +40,13 @@
               >
                 <option *ngFor="let option of winnerOptions" [value]="option">{{ option }}</option>
               </select>
-              <label for="winnerSelect">Winner</label>
-              <div class="invalid-feedback">Winner is required.</div>
+              <label for="winnerSelect" style="padding-left:1.5rem;">Winner</label>
             </div>
 
             <!-- Match Length -->
-            <div class = "col-3 mb-3">
-              <div class="row align-items-center">
+            <div class = "col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 mb-3">
+              <div class="row align-items-center justify-content-center">Time</div>
+              <div class="row align-items-center justify-content-center">
 
                 <!-- Minutes -->
                 <div class="col-5">
@@ -62,7 +64,6 @@
                       [class.is-invalid]="minutesInputRef.invalid && (minutesInputRef.touched || matchForm.submitted)"
                     >
                     <label for="minutesInput">MM</label>
-                    <div class="invalid-feedback">Minutes is required.</div>
                   </div>
                 </div>
 
@@ -87,17 +88,17 @@
                       [class.is-invalid]="secondsInputRef.invalid && secondsInputRef.touched"
                     >
                     <label for="secondsInput">SS</label>
-                    <div class="invalid-feedback">Seconds is required.</div>
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- Match Score -->
-            <div class="col mb-3">
-            <div class="row align-items-center">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 mb-3 ">
+              <div class="row align-items-center justify-content-center">Score</div>
+            <div class="row align-items-center justify-content-center">
               <!-- Radiant -->
-              <div class="col-auto">
+              <div class="col-5">
                 <div class="form-floating">
                   <input 
                     type="number" 
@@ -111,7 +112,6 @@
                     [class.is-invalid]="radiantInput.invalid && radiantInput.touched"
                   >
                   <label>Radiant</label>
-                  <div class="invalid-feedback">Radiant score is required.</div>
                 </div>
               </div>
 
@@ -120,7 +120,7 @@
               </div>
 
               <!-- Dire -->
-              <div class="col-auto">
+              <div class="col-5">
                 <div class="form-floating">
                   <input 
                     type="number" 
@@ -134,17 +134,17 @@
                     [class.is-invalid]="direInput.invalid && direInput.touched"
                   >
                   <label>Dire</label>
-                  <div class="invalid-feedback">Dire score is required.</div>
                 </div>
               </div>
             </div>
             </div>
+               </div>  
 
 
             <!-- Radiant Players -->
-            <div class="row">
+            <div class="row justify-content-center">
 
-            <div class="col-md-6 mb-3">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 mb-3">
               <h5 class="mb-2">Radiant Players</h5>
               <div class="border rounded p-2" style="max-height: 250px; overflow-y: auto;">
                 <ul class="list-group" *ngFor="let player of players">
@@ -165,7 +165,7 @@
             </div>
 
             <!-- Dire Players -->
-            <div class="col-md-6 mb-3">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 mb-3">
               <h5 class="mb-2">Dire Players</h5>
               <div class="border rounded p-2" style="max-height: 250px; overflow-y: auto;">
                 <ul class="list-group" *ngFor="let player of players">

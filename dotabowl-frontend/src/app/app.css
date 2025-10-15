@@ -1,0 +1,13 @@
+.big-link {
+  font-size: 24px; /* adjust size as needed */
+}
+
+.db-navbar {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* optional: space between logo and text */
+}
+
+.db-navbar img {
+  display: block;
+}
