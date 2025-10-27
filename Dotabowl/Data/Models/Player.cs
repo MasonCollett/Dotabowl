@@ -45,5 +45,7 @@ namespace Dotabowl.Api.Models
 
         [Column(TypeName = "decimal(5,2)")] // 3 digits before decimal, 2 digits after 
         public decimal WinRate { get; set; } = 0;
+
+        public string? ProfilePictureUrl { get; set; }
     }
 }

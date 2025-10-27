@@ -18,21 +18,17 @@ export class AddPlayerComponent {
   addPlayer() {
     const newPlayer: Player = {
       name: this.name,
-      steamName: this.steamName,
-      wins: 0,
-      losses: 0,
-      games: 0,
-      adWins: 0,
-      adLosses: 0,
-      adGames: 0,
-      totalGames: 0,
-      winRate: 0
+      totalLosses: 0,
+      totalWins: 0,
+      winRate: 0,
+      totalGameTime: 0,
+      profilePictureUrl: "empty",
     };
 
     this.playerService.addPlayer(newPlayer).subscribe({
       next: player => {
         console.log('Player added:', player);
-        alert(`Added player: ${player.name} (ID: ${player.id})`);
+        alert(`Added player: ${player.name}`);
         this.name = '';
         this.steamName = '';
       },

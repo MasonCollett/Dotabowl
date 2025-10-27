@@ -145,7 +145,7 @@
             <div class="row justify-content-center">
 
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 mb-3">
-              <h5 class="mb-2">Radiant Players</h5>
+              <h5 class="mb-2">Radiant Team</h5>
               <div class="border rounded p-2" style="max-height: 250px; overflow-y: auto;">
                 <ul class="list-group" *ngFor="let player of players">
                   <label class="list-group-item" [for]="'radiant-' + player.id" [class.text-muted]="direPlayerIds.includes(player.id)">
@@ -166,7 +166,7 @@
 
             <!-- Dire Players -->
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 mb-3">
-              <h5 class="mb-2">Dire Players</h5>
+              <h5 class="mb-2">Dire Team</h5>
               <div class="border rounded p-2" style="max-height: 250px; overflow-y: auto;">
                 <ul class="list-group" *ngFor="let player of players">
                   <label class="list-group-item" [for]="'dire-' + player.id" [class.text-muted]="radiantPlayerIds.includes(player.id)">

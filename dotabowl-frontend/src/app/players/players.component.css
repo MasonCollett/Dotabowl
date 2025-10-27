@@ -1,0 +1,20 @@
+/* players.component.css */
+.mat-column-profilePicture {
+  width: 60px;       /* set desired width */
+  height: 60px;      /* set desired height */
+  padding: 0;        /* remove default cell padding */
+}
+
+.player-img {
+  width: 100%;        /* fill the width of the cell */
+  height: 100%;       /* fill the height of the cell */
+  object-fit: cover;  /* crop / scale to fill the square without distortion */
+}
+
+.mat-column-profilePicture {
+  width: 60px;
+}
+
+.mat-column-name {
+  width: 150px;
+}

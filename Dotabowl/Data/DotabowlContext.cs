@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Dotabowl.Api.Data
 {
+    // Tools > NuGet Package Manager > Package Manager Console
     // Add-Migration [name]
     // Update-Database
 

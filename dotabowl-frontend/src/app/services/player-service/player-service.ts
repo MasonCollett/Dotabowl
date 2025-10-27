@@ -2,22 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+// TODO: Import all columns
+
 export interface Player {
-  id?: number;
   name: string;
-  steamName: string;
-
-  wins: number;
-  losses: number;
-  games: number;
-
-  adWins: number;
-  adLosses: number;
-  adGames: number;
-
-  totalGames: number;
-
-  winRate: number; // decimal(5,2) on backend
+  totalWins: number;
+  totalLosses: number;
+  winRate: number;
+  totalGameTime: number;
+  profilePictureUrl: string;
 }
 
 @Injectable({

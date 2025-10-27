@@ -70,6 +70,9 @@ namespace Dotabowl.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ProfilePictureUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("RandomDraftGames")
                         .HasColumnType("int");
 

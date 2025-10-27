@@ -1,9 +1,10 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AddPlayerComponent } from './add-player/add-player-component';
 import { MatchesComponent } from './matches/matches-component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,10 @@ import { MatInputModule } from '@angular/material/input';
     AddPlayerComponent,
     MatchesComponent,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    CommonModule,
+    RouterLink,
+    RouterLinkActive
   ],
   templateUrl: './app.html',
   styleUrls: ['./app.css']        
