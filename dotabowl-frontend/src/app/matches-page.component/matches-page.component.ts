@@ -5,7 +5,7 @@ import { MatchesComponent} from "../matches/matches-component";
 @Component({
   selector: 'app-matches-page',
   standalone: true,
-  imports: [AddMatchComponent, MatchesComponent, MatchesComponent],
+  imports: [ MatchesComponent],
   template: `
     <div class="container mt-3">
       <app-matches></app-matches>

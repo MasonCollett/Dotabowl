@@ -15,6 +15,7 @@
 .container {
   width: 100%;
   overflow-x: auto;      /* horizontal scrollbar */
+  padding-top: 0.25rem;
 }
 
 .wide-table {
@@ -25,4 +26,30 @@
 .container{
   overflow-x: scroll;
 }
+
+.row-even {
+  background-color: #f8f9fa;
+}
+
+.row-odd {
+  background-color: white;
+}
+
+.mat-header-row{
+  background-color: white;
+  font-weight: bold;
+  padding: 0;
+}
+
+.container {
+  padding-left: 0 !important;
+}
+
+.player-name{
+  font-weight: bold;
+  background-color: rgb(173, 136, 42);
+  color: white;
+}
+
+
 

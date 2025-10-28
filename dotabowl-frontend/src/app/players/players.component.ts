@@ -18,15 +18,14 @@ import { MinutesToTimePipe } from '../misc/minutes-to-time-pipe';
   styleUrls: ['./players.component.css']
 })
 export class PlayersComponent implements OnInit {
-  displayedColumns: string[] = ['profilePicture', 
+  displayedColumns: string[] = [
+    'profilePicture', 
     'name', 
     'totalWins',
     'totalLosses',
     'totalGames',
     'winRate', 
     'totalGameTime',
-    'turboWins',
-    'turboLosses',
     'singleDraftWins',
     'singleDraftLosses',
     'adarWins',
@@ -37,6 +36,8 @@ export class PlayersComponent implements OnInit {
     'captDraftLosses',
     'randomDraftWins',
     'randomDraftLosses',
+    'turboWins',
+    'turboLosses',
   ];
 
   dataSource = new MatTableDataSource<Player>([]);
