@@ -1,8 +1,9 @@
-/* players.component.css */
-.mat-column-profilePicture {
-  width: 60px;       /* set desired width */
-  height: 60px;      /* set desired height */
-  padding: 0;        /* remove default cell padding */
+/* Fix width of the column cells */
+.fixed-width {
+  width: 60px;   /* set your desired width */
+  max-width: 60px;
+  min-width: 60px;
+  padding: 0;
 }
 
 .player-img {
@@ -11,10 +12,17 @@
   object-fit: cover;  /* crop / scale to fill the square without distortion */
 }
 
-.mat-column-profilePicture {
-  width: 60px;
+.container {
+  width: 100%;
+  overflow-x: auto;      /* horizontal scrollbar */
 }
 
-.mat-column-name {
-  width: 150px;
+.wide-table {
+  min-width: 1400px;     /* wider than container to trigger scrollbar */
+  table-layout: fixed;    /* ensures your fixed column widths apply */
 }
+
+.container{
+  overflow-x: scroll;
+}
+

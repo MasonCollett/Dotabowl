@@ -6,11 +6,27 @@ import { Observable } from 'rxjs';
 
 export interface Player {
   name: string;
+  steamName: string;
   totalWins: number;
   totalLosses: number;
   winRate: number;
   totalGameTime: number;
   profilePictureUrl: string;
+  turboWins: number;
+  turboLosses: number;
+  singleDraftWins: number;
+  singleDraftLosse: number;
+  adarWins: number;
+  adarLosses: number;
+  allPickWins: number;
+  allPickLosses: number;
+  allRandomWins: number;
+  allRandomLosses: number;
+  captDraftWins: number;
+  captDraftLosses: number;
+  randomDraftWins: number;
+  randomDraftLosse: number;
+  totalGames: number;
 }
 
 @Injectable({

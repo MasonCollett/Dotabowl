@@ -1,28 +1,32 @@
 <div class="container">
-
-    <div style="overflow-x: auto;">
         <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
         
         <ng-container matColumnDef="profilePicture">
         <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let player" sticky>
+        <td mat-cell *matCellDef="let player" class="fixed-width">
             <img [src]="player.profilePictureUrl" alt="{{player.name}}" class="player-img">
         </td>
         </ng-container>
 
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-            <td mat-cell *matCellDef="let player" sticky>{{ player.name }}</td>
+            <td mat-cell *matCellDef="let player">{{ player.name }}</td>
         </ng-container>
 
+
         <ng-container matColumnDef="totalWins">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Wins</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="totalWins">Total Wins</th>
             <td mat-cell *matCellDef="let player">{{ player.totalWins }}</td>
         </ng-container>
 
         <ng-container matColumnDef="totalLosses">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Losses</th>
             <td mat-cell *matCellDef="let player">{{ player.totalLosses }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="totalGames">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Games Played</th>
+            <td mat-cell *matCellDef="let player">{{ player.totalGames }}</td>
         </ng-container>
 
         <ng-container matColumnDef="winRate">
@@ -35,11 +39,69 @@
             <td mat-cell *matCellDef="let player" >{{ player.totalGameTime | minutesToTime}}</td>
         </ng-container>
 
+        <ng-container matColumnDef="turboWins">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Turbo Wins</th>
+        <td mat-cell *matCellDef="let player">{{ player.turboWins }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="turboLosses">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Turbo Losses</th>
+        <td mat-cell *matCellDef="let player">{{ player.turboLosses }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="singleDraftWins">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Single Draft Wins</th>
+        <td mat-cell *matCellDef="let player">{{ player.singleDraftWins }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="singleDraftLosses">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Single Draft Losses</th>
+        <td mat-cell *matCellDef="let player">{{ player.singleDraftLosses }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="adarWins">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ADAR Wins</th>
+        <td mat-cell *matCellDef="let player">{{ player.adarWins }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="adarLosses">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ADAR Losses</th>
+        <td mat-cell *matCellDef="let player">{{ player.adarLosses }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="allPickWins">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>All Pick Wins</th>
+        <td mat-cell *matCellDef="let player">{{ player.allPickWins }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="allPickLosses">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>All Pick Losses</th>
+        <td mat-cell *matCellDef="let player">{{ player.allPickLosses }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="captDraftWins">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Capt Draft Wins</th>
+        <td mat-cell *matCellDef="let player">{{ player.captDraftWins }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="captDraftLosses">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Capt Draft Losses</th>
+        <td mat-cell *matCellDef="let player">{{ player.captDraftLosses }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="randomDraftWins">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Random Draft Wins</th>
+        <td mat-cell *matCellDef="let player">{{ player.randomDraftWins }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="randomDraftLosses">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Random Draft Losses</th>
+        <td mat-cell *matCellDef="let player">{{ player.randomDraftLosses }}</td>
+        </ng-container>
+
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
         </table>
-    </div>
-
-
 </div>

@@ -18,7 +18,26 @@ import { MinutesToTimePipe } from '../misc/minutes-to-time-pipe';
   styleUrls: ['./players.component.css']
 })
 export class PlayersComponent implements OnInit {
-displayedColumns: string[] = ['profilePicture', 'name', 'totalWins', 'totalLosses', 'winRate', 'totalGameTime'];
+  displayedColumns: string[] = ['profilePicture', 
+    'name', 
+    'totalWins',
+    'totalLosses',
+    'totalGames',
+    'winRate', 
+    'totalGameTime',
+    'turboWins',
+    'turboLosses',
+    'singleDraftWins',
+    'singleDraftLosses',
+    'adarWins',
+    'adarLosses',
+    'allPickWins',
+    'allPickLosses',
+    'captDraftWins',
+    'captDraftLosses',
+    'randomDraftWins',
+    'randomDraftLosses',
+  ];
 
   dataSource = new MatTableDataSource<Player>([]);
 
@@ -29,8 +48,14 @@ displayedColumns: string[] = ['profilePicture', 'name', 'totalWins', 'totalLosse
   ngOnInit(): void {
     this.playerService.getPlayers().subscribe(players => {
       this.dataSource.data = players;
-      this.dataSource.sort = this.sort;
     });
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
+    this.sort.active = 'totalWins';
+    this.sort.direction = 'desc';
+    this.sort.sortChange.emit();
   }
 
   getWinRateColor(winRate: number): string {

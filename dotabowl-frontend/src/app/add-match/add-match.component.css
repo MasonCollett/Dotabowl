@@ -8,6 +8,20 @@
   padding-bottom: .5rem;
 }
 
+.player-img {
+  width: 26px;       /* container-controlled width */
+  aspect-ratio: 1;   /* keeps it a perfect square */
+  object-fit: cover; /* scales and crops the image nicely */
+  flex-shrink: 0;    /* prevents shrinking if row is tight */
+  transition: opacity 0.18s ease;
+
+}
+
+/* When the label is muted, make image semi-transparent */
+.list-group-item.text-muted .player-img {
+  opacity: 0.5;
+}
+
 .add-match-title {
   margin-top: 0.5rem;
 }

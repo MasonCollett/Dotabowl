@@ -15,24 +15,24 @@ export class AddPlayerComponent {
 
   constructor(private playerService: PlayerService) {}
 
-  addPlayer() {
-    const newPlayer: Player = {
-      name: this.name,
-      totalLosses: 0,
-      totalWins: 0,
-      winRate: 0,
-      totalGameTime: 0,
-      profilePictureUrl: "empty",
-    };
+//   addPlayer() {
+//     const newPlayer: Player = {
+//       name: this.name,
+//       totalLosses: 0,
+//       totalWins: 0,
+//       winRate: 0,
+//       totalGameTime: 0,
+//       profilePictureUrl: "empty",
+//     };
 
-    this.playerService.addPlayer(newPlayer).subscribe({
-      next: player => {
-        console.log('Player added:', player);
-        alert(`Added player: ${player.name}`);
-        this.name = '';
-        this.steamName = '';
-      },
-      error: err => console.error(err)
-    });
-  }
-}
+//     this.playerService.addPlayer(newPlayer).subscribe({
+//       next: player => {
+//         console.log('Player added:', player);
+//         alert(`Added player: ${player.name}`);
+//         this.name = '';
+//         this.steamName = '';
+//       },
+//       error: err => console.error(err)
+//     });
+//   }
+ }
