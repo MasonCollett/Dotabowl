@@ -41,10 +41,9 @@ namespace Dotabowl.Controllers
         [HttpPost]
         public ActionResult<Player> AddPlayer([FromBody] Player player)
         {
-            _context.Players.Add(player); // tell EF Core to add this player to Player table
-            _context.SaveChanges();       // save it to the database
+            _context.Players.Add(player); 
+            _context.SaveChanges();      
 
-            // return a response with the newly created player
             return CreatedAtAction(nameof(GetPlayer), new { id = player.Id }, player);
         }
     }

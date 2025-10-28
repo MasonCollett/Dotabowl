@@ -1,27 +1,57 @@
-.big-link {
-  font-size: 24px; /* adjust size as needed */
+/* Navbar main styles */
+.navbar-color {
+  background: linear-gradient(120deg, rgb(78, 1, 1), rgb(50, 0, 0));
+  background-size: 200% 200%;
+  animation: navbarGradient 16s linear infinite;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  border-bottom: 2px solid #a83232;
+  z-index: 1000;
 }
 
+/* Smooth gradient animation */
+@keyframes navbarGradient {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Logo + text alignment */
 .db-navbar {
   display: flex;
   align-items: center;
-  gap: 10px; /* optional: space between logo and text */
-  color: red;
+  gap: 10px;
+  color: #ff4c4c;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
 }
 
 .db-navbar img {
   display: block;
 }
 
-.navbar-color{
-    background-color:rgb(78, 1, 1);
+.nav-link {
+  color: white;
+  position: relative;
+  transition: color 0.3s, text-shadow 0.3s;
+  font-weight: 500;
 }
 
-.nav-link{
-    color: white;
+.nav-link:hover {
+  color: #ff9999;
+  text-shadow: 0 0 10px #ff4c4c;
 }
 
+/* Active route */
 .nav-link.active {
   font-weight: bold;
-  color: white !important;
+  color: #ff4c4c !important;
+  text-shadow: 0 0 8px #ff4c4c;
+}
+
+/* Optional: make the toggler icon brighter */
+.navbar-toggler {
+  border-color: #ff4c4c;
+}
+
+.navbar-toggler-icon {
+  filter: invert(100%);
 }

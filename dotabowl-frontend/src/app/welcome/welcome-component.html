@@ -1,0 +1,36 @@
+<div class="home-container text-center d-flex flex-column align-items-center justify-content-center">
+  <div class="hero">
+    <img src="assets/images/dota_logo.png" alt="Dotabowl Logo" class="hero-logo mb-3">
+    <h1 class="display-4 dota-font text-light mb-2">Welcome to D O T A B O W L</h1>
+    <p class="lead text-light-50 mb-4">
+      Butts in seats.
+    </p>
+
+    <div class="hero-buttons">
+      <button mat-raised-button color="accent" routerLink="/players" class="me-3">
+        View Players
+      </button>
+      <button mat-raised-button color="primary" routerLink="/matches">
+        Add Match
+      </button>
+    </div>
+  </div>
+
+  <div class="mt-5 container recent-section">
+    <h2 class="text-light mb-4">Recent Highlights</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-4 mb-3" *ngFor="let card of cards">
+        <mat-card class="highlight-card">
+          <mat-card-header>
+            <mat-card-title>{{ card.title }}</mat-card-title>
+            <mat-card-subtitle>{{ card.subtitle }}</mat-card-subtitle>
+          </mat-card-header>
+          <img mat-card-image [src]="card.image" alt="{{ card.title }}">
+          <mat-card-content>
+            <p>{{ card.description }}</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
