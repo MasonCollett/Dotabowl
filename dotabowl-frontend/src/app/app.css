@@ -2,17 +2,17 @@
 .navbar-color {
   background: linear-gradient(120deg, rgb(78, 1, 1), rgb(50, 0, 0));
   background-size: 200% 200%;
-  animation: navbarGradient 16s linear infinite;
+  /* animation: navbarGradient 16s linear infinite; */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   border-bottom: 2px solid #a83232;
   z-index: 1000;
 }
 
 /* Smooth gradient animation */
-@keyframes navbarGradient {
+/* @keyframes navbarGradient {
   0% { background-position: 0% 50%; }
   100% { background-position: 200% 50%; }
-}
+} */
 
 /* Logo + text alignment */
 .db-navbar {

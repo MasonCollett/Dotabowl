@@ -1,9 +1,13 @@
-<div class="home-container text-center d-flex flex-column align-items-center justify-content-center">
+<div class="home-container text-center flex-column justify-content-center">
+
   <div class="hero">
     <img src="assets/images/dota_logo.png" alt="Dotabowl Logo" class="hero-logo mb-3">
-    <h1 class="display-4 dota-font text-light mb-2">Welcome to D O T A B O W L</h1>
+    <h1 class="display-4 dota-font text-light mb-2">
+      Welcome to <span class="d-none d-sm-inline">D O T A B O W L</span>
+      <span class="d-inline d-sm-none"><br>D O T A B O W L</span>
+    </h1>
     <p class="lead text-light-50 mb-4">
-      Butts in seats.
+      Drain or be drained.
     </p>
 
     <div class="hero-buttons">
@@ -16,21 +20,75 @@
     </div>
   </div>
 
-  <div class="mt-5 container recent-section">
-    <h2 class="text-light mb-4">Recent Highlights</h2>
-    <div class="row justify-content-center">
-      <div class="col-md-4 mb-3" *ngFor="let card of cards">
-        <mat-card class="highlight-card">
-          <mat-card-header>
-            <mat-card-title>{{ card.title }}</mat-card-title>
-            <mat-card-subtitle>{{ card.subtitle }}</mat-card-subtitle>
-          </mat-card-header>
-          <img mat-card-image [src]="card.image" alt="{{ card.title }}">
-          <mat-card-content>
-            <p>{{ card.description }}</p>
-          </mat-card-content>
-        </mat-card>
-      </div>
+<div class="divider">
+  <span class="line"></span>
+  <span class="logo">
+    <img src="assets/images/dota_logo.png" alt="Dotabowl Logo" class="hero-logo">
+  </span>
+  <span class="line"></span>
+</div>
+
+
+<div class="container recent-section">
+  <div class="row justify-content-center">
+    <div class="col-md-4 mb-4" *ngFor="let card of cards">
+      <mat-card class="highlight-card p-3">
+        <!-- Card header / title -->
+        <div class="card-header mb-3">
+          <div class="card-header-text text-center">
+            <h5 class="title-text">{{ card.title }}</h5>
+          </div>
+        </div>
+
+        <!-- Avatar + Profile side by side -->
+        <div class="row align-items-center mb-2">
+          <div class="col d-flex justify-content-center align-items-center">
+            <div class="avatar-wrapper me-3">
+              <img [src]="card.image" alt="avatar" class="avatar-img">
+            </div>
+            <div class="profile-wrapper text-center">
+              <img [src]="card.profilePic" alt="profile" class="profile-img mb-1">
+              <h5 class="steam-name mb-0">{{ card.subtitle }}</h5>
+            </div>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="row">
+          <div class="col">
+            <p class="description-text mt-2">{{ card.description }}</p>
+          </div>
+        </div>
+      </mat-card>
     </div>
   </div>
 </div>
+
+
+  <div class="container recent-section event-stats">
+    <mat-card class="highlight-card p-4 mb-4">
+      <div class="card-header">
+        <div class="title-text h4" *ngIf="totalMatchesPlayed$ | async as totalMatches">
+          {{ totalMatches }}
+        </div>
+        <h5 class="steam-name">Matches</h5>
+       </div>
+    </mat-card>
+    <mat-card class="highlight-card p-4 mb-4">
+      <div class="card-header">
+        <div class="title-text h4" *ngIf="totalGameTime$ | async as totalTime">
+          {{ totalTime.hours }}h {{ totalTime.minutes }}m
+        </div>
+        <h5 class="steam-name">Man Hours</h5>
+      </div>
+    </mat-card>
+    <mat-card class="highlight-card p-4 mb-4">
+      <div class="card-header">
+        <div class="title-text h4">
+          1
+        </div>
+        <h5 class="steam-name">Weekend With Friends</h5>
+      </div>
+    </mat-card>
+  </div>
+
