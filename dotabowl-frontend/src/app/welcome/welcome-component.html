@@ -83,15 +83,15 @@
             {{ totalMatches }}
           </h2>
         </div>
-        <h5 class="event-stats-font">Matches</h5>
+        <h5 class="event-stats-font">Matches Played</h5>
       </div>
     </mat-card>
 
     <mat-card class="highlight-card  mb-4">
       <div class="card-header">
-        <div *ngIf="totalGameTime$ | async as totalTime">
+        <div *ngIf="totalGameTimeHours$ | async as totalTime">
           <h2 class="event-title-text" >
-            {{ totalTime.hours }}h {{ totalTime.minutes }}m
+            {{ totalTime }}
           </h2>
         </div>
         <h5 class="event-stats-font">Man Hours</h5>
@@ -103,7 +103,7 @@
         <div>
           <h1 class="event-title-text" >1</h1>
         </div>
-        <h5 class="event-stats-font">Weekend With Friends</h5>
+        <h5 class="event-stats-font dota-font">Dotabowl</h5>
       </div>
     </mat-card>
   </div>

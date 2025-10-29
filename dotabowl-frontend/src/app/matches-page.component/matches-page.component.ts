@@ -6,10 +6,8 @@ import { MatchesComponent} from "../matches/matches-component";
   selector: 'app-matches-page',
   standalone: true,
   imports: [ MatchesComponent],
-  template: `
-    <div class="container mt-3">
-      <app-matches></app-matches>
-    </div>
-  `
+  templateUrl: './matches-page.component.html',
+  styleUrl: './matches-page.component.css',
+
 })
 export class MatchesPageComponent {}

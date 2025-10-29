@@ -24,6 +24,8 @@ export class WelcomeComponent implements OnInit {
   cards: any[] = [];
   totalMatchesPlayed$!: Observable<number>;
   totalGameTime$!: Observable<{ hours: number; minutes: number }>;
+  totalGameTimeHours$!: Observable<number>;
+
 
 
   constructor(
@@ -36,6 +38,17 @@ export class WelcomeComponent implements OnInit {
     this.totalMatchesPlayed$ = this.matchService.getMatches().pipe(
       map(matches => matches.length)
     );
+
+    this.totalGameTimeHours$ = this.playerService.getPlayers().pipe(
+      map(players => {
+        const totalMinutesDecimal = players.reduce((sum, player) => {
+          const minutes = player.totalGameTime || 0;
+          return sum + minutes;
+        }, 0);
+        return Math.round((totalMinutesDecimal / 60) * 10) / 10;
+      })
+    );
+
 
     this.totalGameTime$ = this.playerService.getPlayers().pipe(
       map(players => {

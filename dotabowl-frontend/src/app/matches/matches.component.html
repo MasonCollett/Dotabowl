@@ -6,11 +6,13 @@
   No matches yet.
 </div>
 
-<div class="table-responsive container-fluid">
-  <table class="table table-striped" id="matchHistory">
+<div class="container-fluid">
+  <div class="frosted">
+    <div class="container">
+  <table class="table table-responsive align-middle" id="matchHistory">
     <thead>
-      <tr>
-        <th scope="col">Date</th>
+      <tr class = "">
+        <th scope="col-md-auto">Date</th>
         <th scope="col">Mode</th>
         <th scope="col">Radiant</th>
         <th scope="col">Score</th>
@@ -19,18 +21,22 @@
         <th scope="col">Game Length</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="table-group-divider">
       <tr *ngFor="let match of matches">
-        <td>{{ match.date | date:'MMM d, y, h:mm a' }}</td>
-        <td [ngClass]="getTypeColor(match.type)">{{ match.type }}</td>      
+        <td class="text-start">{{ match.date | date:'MMM d, y, h:mm a' }}</td>
+        <td class="text-center" [ngClass]="getTypeColor(match.type)">{{ match.type }}</td>      
         <td>{{ getRadiantNames(match) }}</td>
-        <td>{{ match.radiantKills }} - {{ match.direKills }}</td>
+        <td class="text-center">{{ match.radiantKills }} - {{ match.direKills }}</td>
         <td>{{ getDireNames(match) }}</td>
-        <td  [ngClass]="getWinnerColor(match.winner)">{{ match.winner }}</td>
-        <td>{{ match.length }}</td>
+        <td class="text-center" [ngClass]="getWinnerColor(match.winner)">{{ match.winner }}</td>
+        <td class="text-center">{{ match.length }}</td>
       </tr>
     </tbody>
   </table>
 </div>
+</div>
+</div>
+
+
 
 

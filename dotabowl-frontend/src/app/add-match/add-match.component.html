@@ -1,9 +1,11 @@
-<div class="container-fluid">
+<div class="container-fluid add-match-container">
 
   <h3 class="add-match-title">Add Match</h3>
 
-  <form #matchForm="ngForm" (ngSubmit)="addMatch(matchForm)" novalidate>    <div class="container">
-    <div class="container">
+  <form data-bs-theme="dark" #matchForm="ngForm" (ngSubmit)="addMatch(matchForm)" novalidate>    
+    
+    <div class="container frosted mb-4">
+
 
  
     <div class="row align-items-end justify-content-center">
@@ -144,9 +146,9 @@
             <!-- Radiant Players -->
             <div class="row justify-content-center">
 
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 mb-3">
-              <h5 class="mb-2">Radiant Team</h5>
-              <div class="border rounded p-2" style="max-height: 250px; overflow-y: auto;">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 mb-3 team-select">
+              <h5 class="mb-2 text-center">Radiant Team</h5>
+              <div class="" style="max-height: 250px; overflow-y: auto;">
                 <ul class="list-group" *ngFor="let player of players">
                   <label class="list-group-item" [for]="'radiant-' + player.id" [class.text-muted]="direPlayerIds.includes(player.id)">
                     <input
@@ -166,9 +168,9 @@
             </div>
 
             <!-- Dire Players -->
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 mb-3">
-              <h5 class="mb-2">Dire Team</h5>
-              <div class="border rounded p-2" style="max-height: 250px; overflow-y: auto;">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 mb-3 team-select">
+              <h5 class="mb-2 text-center">Dire Team</h5>
+              <div class="border rounded" style="max-height: 250px; overflow-y: auto;">
                 <ul class="list-group" *ngFor="let player of players">
                   <label class="list-group-item" [for]="'dire-' + player.id" [class.text-muted]="radiantPlayerIds.includes(player.id)">
                   <input
@@ -187,11 +189,11 @@
                 </ul>
               </div>
             </div>
-            </div>
+          </div>
 
 
             <!-- Add Match Button -->
-            <div class="col-12 text-center mt-3">
+            <div class="col-12 text-center mt-2">
               <button 
                 type="submit" 
                 class="btn btn-primary px-4"
@@ -204,7 +206,6 @@
               </button>
             </div>
       </div>
-    </div>
   </form>
 </div>
 

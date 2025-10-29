@@ -9,17 +9,18 @@
 
 .match-type-white   { background-color: #FFFFFF; }
 .match-type-pink    { background-color: #FFB3BA; }
-.match-type-orange  { background-color: #FFDFBA; }
-.match-type-yellow  { background-color: #FFFFBA; }
-.match-type-green   { background-color: #BAFFC9; }
-.match-type-teal    { background-color: #BAE1FF; }
-.match-type-purple  { background-color: #E0BAFF; }
-.match-type-peach   { background-color: #FFD8BA; }
-.winner-radiant { color:green}
-.winner-dire { color:red}
+.match-type-orange  { background-color: #d9af80; }
+.match-type-yellow  { background-color: #c5c56c; }
+.match-type-green   { background-color: #7eb58a; }
+.match-type-teal    { background-color: #82abca; }
+.match-type-purple  { background-color: #ad87cd; }
+.match-type-peach   { background-color: #dfb28f; }
+.winner-radiant { color:rgb(111, 214, 111)}
+.winner-dire { color:rgb(255, 112, 112)}
 
 .match-type-rainbow {
   font-weight: bold;
+  
   
   background: linear-gradient(
     90deg,
@@ -46,3 +47,41 @@
     background-position: 100% 50%;
   }
 }
+
+td{
+  color:white;
+  border-bottom: 2px solid #495057;
+}
+
+th {
+    background-color: #212529;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px 10px;
+    text-align: center;
+    border-bottom: 2px solid #555;
+    vertical-align: middle;
+}
+
+td:not([class*="match-type"]) {
+  background-color: #2c3033;
+}
+
+#matchHistory tbody tr:nth-child(even) td:not([class*="match-type"]) {
+  background-color: #212529;
+}
+
+#matchHistory tbody tr:hover td:not([class*="match-type"]) {
+  background-color: #595959;
+}
+
+#matchHistory {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+
+

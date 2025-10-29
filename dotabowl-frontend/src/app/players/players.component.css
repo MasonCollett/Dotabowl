@@ -1,55 +1,106 @@
-/* Fix width of the column cells */
-.fixed-width {
-  width: 60px;   /* set your desired width */
-  max-width: 60px;
-  min-width: 60px;
-  padding: 0;
-}
-
 .player-img {
-  width: 100%;        /* fill the width of the cell */
-  height: 100%;       /* fill the height of the cell */
-  object-fit: cover;  /* crop / scale to fill the square without distortion */
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
 }
 
-.container {
-  width: 100%;
-  overflow-x: auto;      /* horizontal scrollbar */
-  padding-top: 0.25rem;
+.player-page {
+
+  min-height: 100vh;
+  background: repeating-linear-gradient(
+    135deg,
+    #250000,
+    #250000 80px,
+    #350000 80px,
+    #350000 160px
+  );
+  background-size: 200% 200%;
+  animation: stripeFlow 135s linear infinite;
+  color: #fff;
+  padding-top: 20px;
 }
 
-.wide-table {
-  min-width: 1400px;     /* wider than container to trigger scrollbar */
-  table-layout: fixed;    /* ensures your fixed column widths apply */
+@keyframes stripeFlow {
+  0% { background-position: 0 0; }
+  100% { background-position: 100% 100%; }
 }
 
-.container{
-  overflow-x: scroll;
+.sortable-header {
+  cursor: pointer;
 }
 
-.row-even {
-  background-color: #f8f9fa;
+.header-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px; /* space between text and arrow */
 }
 
-.row-odd {
-  background-color: white;
-}
-
-.mat-header-row{
-  background-color: white;
-  font-weight: bold;
-  padding: 0;
-}
-
-.container {
-  padding-left: 0 !important;
-}
-
-.player-name{
-  font-weight: bold;
-  background-color: rgb(173, 136, 42);
+.data-cell {
   color: white;
+  font-weight: bold;
 }
 
+.player-page .table {
+  width: 220%;            /* required for fixed layout */
+}
 
+td{
+  color:white;
+  border: 1px solid #495057;
+}
+
+td:not([class*="winrate-cell"]) {
+  background-color: #2c3033;
+}
+
+tbody tr:nth-child(even) td:not([class*="winrate-cell"]) {
+  background-color: #212529;
+}
+
+tbody tr:hover td:not([class*="winrate-cell"]) {
+  background-color: #595959;
+}
+
+th {
+    background-color: #212529;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 8px;
+    text-align: center;
+    border: 2px solid #555;
+}
+
+th.sortable-header:hover {
+    background-color: #555;
+}
+
+/* base sticky style */
+.sticky-col {
+    position: sticky;
+    left: 0;
+    z-index: 3; /* make sure it sits above other cells */
+}
+
+/* for the second sticky column (name), shift it right */
+th.sticky-col:nth-child(2),
+td.sticky-col:nth-child(2) {
+    left: 65px; /* width of first column */
+    box-shadow: 2px 0 5px -2px rgba(0,0,0,0.5);
+    border-right: 1px solid #555;
+
+}
+
+th.sticky-col:first-child,
+td.sticky-col:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 4; /* higher than the second sticky column */
+    border-right: 1px solid #555;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    padding: 0; /* ensures sticky aligns with container edge */
+}
 

@@ -1,0 +1,19 @@
+.match-page {
+  min-height: 100vh;
+  background: repeating-linear-gradient(
+    135deg,
+    #250000,
+    #250000 80px,
+    #350000 80px,
+    #350000 160px
+  );
+  background-size: 200% 200%;
+  animation: stripeFlow 135s linear infinite;
+  color: #fff;
+  padding-top: 20px;
+}
+
+@keyframes stripeFlow {
+  0% { background-position: 0 0; }
+  100% { background-position: 100% 100%; }
+}

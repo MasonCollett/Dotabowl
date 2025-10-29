@@ -1,119 +1,68 @@
-<div class="container">
-        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
-        
-        <ng-container matColumnDef="profilePicture" sticky>
-        <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let player" class="fixed-width">
-            <img [src]="player.profilePictureUrl" alt="{{player.name}}" class="player-img">
-        </td>
-        </ng-container>
+<div class="player-page">
+    <div class="container">
 
-        <ng-container matColumnDef="name" sticky>
-            <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
-            <td mat-cell *matCellDef="let player" class="player-name">{{ player.name }}</td>
-        </ng-container>
-
-
-        <ng-container matColumnDef="totalWins">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header="totalWins">Total Wins</th>
-            <td mat-cell *matCellDef="let player">{{ player.totalWins }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="totalLosses">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Losses</th>
-            <td mat-cell *matCellDef="let player">{{ player.totalLosses }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="totalGames">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Games Played</th>
-            <td mat-cell *matCellDef="let player">{{ player.totalGames }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="winRate">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Win Rate</th>
-            <td mat-cell *matCellDef="let player" [ngStyle]="{'background-color': getWinRateColor(player.winRate)}">{{ player.winRate | number:'1.0-2' }}%</td>
-        </ng-container>
-
-        <ng-container matColumnDef="totalGameTime">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Game Time</th>
-            <td mat-cell *matCellDef="let player" >{{ player.totalGameTime | minutesToTime}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="adWins">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Ability Draft Wins</th>
-            <td mat-cell *matCellDef="let player">{{ player.adWins }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="adLosses">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Ability Draft Losses</th>
-            <td mat-cell *matCellDef="let player">{{ player.adLosses }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="turboWins">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Turbo Wins</th>
-        <td mat-cell *matCellDef="let player">{{ player.turboWins }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="turboLosses">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Turbo Losses</th>
-        <td mat-cell *matCellDef="let player">{{ player.turboLosses }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="singleDraftWins">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Single Draft Wins</th>
-        <td mat-cell *matCellDef="let player">{{ player.singleDraftWins }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="singleDraftLosses">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Single Draft Losses</th>
-        <td mat-cell *matCellDef="let player">{{ player.singleDraftLosses }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="adarWins">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>ADAR Wins</th>
-        <td mat-cell *matCellDef="let player">{{ player.adarWins }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="adarLosses">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>ADAR Losses</th>
-        <td mat-cell *matCellDef="let player">{{ player.adarLosses }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="allPickWins">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>All Pick Wins</th>
-        <td mat-cell *matCellDef="let player">{{ player.allPickWins }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="allPickLosses">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>All Pick Losses</th>
-        <td mat-cell *matCellDef="let player">{{ player.allPickLosses }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="captDraftWins">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Capt Draft Wins</th>
-        <td mat-cell *matCellDef="let player">{{ player.captDraftWins }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="captDraftLosses">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Capt Draft Losses</th>
-        <td mat-cell *matCellDef="let player">{{ player.captDraftLosses }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="randomDraftWins">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Random Draft Wins</th>
-        <td mat-cell *matCellDef="let player">{{ player.randomDraftWins }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="randomDraftLosses">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Random Draft Losses</th>
-        <td mat-cell *matCellDef="let player">{{ player.randomDraftLosses }}</td>
-        </ng-container>
-
-
-        <tr mat-header-row class="mat-header-row" *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; let i = index; columns: displayedColumns;"
-            [class.row-even]="i % 2 === 0"
-            [class.row-odd]="i % 2 !== 0">
+    <div class="frosted"> 
+  <div class="container table-responsive">
+    <table class="table text-center align-middle table">
+      <thead>
+        <tr>
+            <th *ngFor="let col of columns"
+                [class.sortable-header]="col.sortable"
+                [class.sticky-col]="col.key === 'profilePictureUrl' || col.key === 'name'"
+                (click)="col.sortable && sortData(col.key)">
+                <span class="header-content">
+                {{ col.label }}
+                <i *ngIf="sortColumn === col.key"
+                    class="bi"
+                    [ngClass]="sortDirection === 'asc' ? 'bi-arrow-up' : 'bi-arrow-down'">
+                </i>
+                </span>
+            </th>
         </tr>
-        </table>
+
+      </thead>
+        <tbody>
+        <tr *ngFor="let player of dataSource.data">
+            <td
+                *ngFor="let column of columns"
+                [ngClass]="{'winrate-cell': column.key === 'winRate',
+                    'sticky-col': column.key === 'profilePictureUrl' || column.key === 'name'
+                    }"
+                [style.background-color]="column.key === 'winRate' ? getWinRateColor(player.winRate) : null"
+                class="data-cell"            >
+            <ng-container [ngSwitch]="column.key">
+
+                <ng-container *ngSwitchCase="'profilePictureUrl'">
+                <img
+                    [src]="player.profilePictureUrl"
+                    [alt]="player.name"
+                    class="player-img rounded-circle"
+                >
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'winRate'">
+                {{ player.winRate | number:'1.0-2' }}%
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'totalGameTime'">
+                {{ player.totalGameTime | minutesToTime }}
+                </ng-container>
+
+                <ng-container *ngSwitchDefault>
+                {{ player[column.key] }}
+                </ng-container>
+
+            </ng-container>
+            </td>
+        </tr>
+        </tbody>
+
+
+    </table>
+  </div>
+      </div>
+
+</div>
+<div style="height: 45px;"></div>
+
 </div>
