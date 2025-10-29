@@ -39,6 +39,16 @@
             <td mat-cell *matCellDef="let player" >{{ player.totalGameTime | minutesToTime}}</td>
         </ng-container>
 
+        <ng-container matColumnDef="adWins">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Ability Draft Wins</th>
+            <td mat-cell *matCellDef="let player">{{ player.adWins }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="adLosses">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Ability Draft Losses</th>
+            <td mat-cell *matCellDef="let player">{{ player.adLosses }}</td>
+        </ng-container>
+
         <ng-container matColumnDef="turboWins">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Turbo Wins</th>
         <td mat-cell *matCellDef="let player">{{ player.turboWins }}</td>

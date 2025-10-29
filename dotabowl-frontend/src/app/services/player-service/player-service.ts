@@ -15,18 +15,27 @@ export interface Player {
   turboWins: number;
   turboLosses: number;
   singleDraftWins: number;
-  singleDraftLosse: number;
+  singleDraftLosses: number;
+  singleDraftGames: number;
   adarWins: number;
   adarLosses: number;
+  adarGames: number;
   allPickWins: number;
   allPickLosses: number;
+  allPickGames: number;
   allRandomWins: number;
   allRandomLosses: number;
+  allRandomGames: number;
   captDraftWins: number;
   captDraftLosses: number;
+  captDraftGames: number;
   randomDraftWins: number;
-  randomDraftLosse: number;
+  randomDraftLosses: number;
+  randomDraftGames: number;
   totalGames: number;
+  adWins: number;
+  adLosses: number;
+  adGames: number;
 }
 
 @Injectable({

@@ -56,6 +56,12 @@ namespace Dotabowl.Controllers
                 player.ADARGames += 1;
                 if (isWinner) player.ADARWins += 1;
                 else player.ADARLosses += 1;
+            },
+            ["Ability Draft"] = (player, isWinner) =>
+            {
+                player.ADGames += 1;
+                if (isWinner) player.ADWins += 1;
+                else player.ADLosses += 1;
             }
         };
 

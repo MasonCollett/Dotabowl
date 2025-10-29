@@ -39,6 +39,15 @@ namespace Dotabowl.Migrations
                     b.Property<int>("ADARWins")
                         .HasColumnType("int");
 
+                    b.Property<int>("ADGames")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ADLosses")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ADWins")
+                        .HasColumnType("int");
+
                     b.Property<int>("AllPickGames")
                         .HasColumnType("int");
 

@@ -26,6 +26,8 @@ export class PlayersComponent implements OnInit {
     'totalGames',
     'winRate', 
     'totalGameTime',
+    'adWins',
+    'adLosses',
     'singleDraftWins',
     'singleDraftLosses',
     'adarWins',

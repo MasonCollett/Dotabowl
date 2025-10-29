@@ -36,6 +36,10 @@ namespace Dotabowl.Api.Models
         public int ADARLosses { get; set; } = 0;
         public int ADARGames { get; set; } = 0;
 
+        public int ADWins { get; set; } = 0;
+        public int ADLosses { get; set; } = 0;
+        public int ADGames { get; set; } = 0;
+
         public int TotalGames { get; set; } = 0;
         public int TotalWins { get; set; } = 0;
         public int TotalLosses { get; set; } = 0;

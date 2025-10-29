@@ -39,7 +39,7 @@ export class AddMatchComponent {
   }
 
   winnerOptions = ['Radiant', 'Dire'];
-  typeOptions = ['Ability Draft', 'ADAR', 'All Pick', 'All Random', 'Captains Draft', 'Single Draft', 'Turbo']
+  typeOptions = ['Ability Draft', 'ADAR', 'All Pick', 'All Random', 'Captains Draft', 'Random Draft', 'Single Draft', 'Turbo']
 
   players: any[] = [];
   radiantPlayerIds: number[] = [];
