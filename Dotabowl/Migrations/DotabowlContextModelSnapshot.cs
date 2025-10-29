@@ -133,47 +133,6 @@ namespace Dotabowl.Migrations
                     b.ToTable("Players");
                 });
 
-            modelBuilder.Entity("Dotabowl.Data.Models.Hero", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AdGames")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AdLosses")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AdWins")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Games")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Losses")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TotalGames")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("WinRate")
-                        .HasColumnType("decimal(5,2)");
-
-                    b.Property<int>("Wins")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Heroes");
-                });
-
             modelBuilder.Entity("Dotabowl.Data.Models.Match", b =>
                 {
                     b.Property<int>("Id")

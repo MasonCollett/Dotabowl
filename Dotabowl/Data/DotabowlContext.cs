@@ -15,7 +15,7 @@ namespace Dotabowl.Api.Data
         public DbSet<Player> Players { get; set; }
         public DbSet<Match> Matches { get; set; }
         public DbSet<MatchParticipant> MatchParticipants { get; set; }
-        public DbSet<Hero> Heroes { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
