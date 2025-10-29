@@ -45,6 +45,7 @@ export class HighlightService {
         singleDraftGames: 0,
         totalWins: 0,
         totalLosses: 0,
+        adWins: 0,
     } as Player;
   }
 
@@ -76,8 +77,8 @@ export class HighlightService {
     if (validPlayers.length === 0) return this.getDummy();
 
     return players.reduce((best, player) =>
-      (player.allPickWins + player.captDraftGames + player.randomDraftWins)/(player.allPickGames + player.captDraftGames + player.randomDraftGames) > 
-      (best.allPickWins + best.captDraftGames + best.randomDraftWins)/(best.allPickGames + best.captDraftGames + best.randomDraftGames)  ? player : best
+      (player.allPickWins + player.captDraftGames + player.randomDraftWins) > 
+      (best.allPickWins + best.captDraftGames + best.randomDraftWins) ? player : best
     );
   }
 
@@ -89,21 +90,20 @@ export class HighlightService {
     if (validPlayers.length === 0) return this.getDummy();
 
     return players.reduce((best, player) =>
-      (player.adWins)/(player.adGames) > 
-      (best.adWins)/(best.adGames)  ? player : best
+      player.adWins > best.adWins  ? player : best
     );
   }
 
-  getAdKingWinrate(player: Player){
-    return ((player.adWins / player.adLosses) * 100).toFixed(1);
+  getAdKingWins(player: Player){
+    return player.adWins;
   }
 
-  getNormKingWinrate(player: Player){
-    return ((player.allPickWins + player.captDraftGames + player.randomDraftWins)/(player.allPickGames + player.captDraftGames + player.randomDraftGames) * 100).toFixed(1);
+  getNormKingWins(player: Player){
+    return (player.allPickWins + player.captDraftGames + player.randomDraftWins);
   }
 
-  getRandKingWinrate(player: Player){
-    return ((player.adarWins + player.allRandomWins + player.singleDraftWins)/(player.adarGames + player.allRandomGames + player.singleDraftGames) * 100).toFixed(1);
+  getRandKingWins(player: Player){
+    return (player.adarWins + player.allRandomWins + player.singleDraftWins);
   }
 
   getHighlights(players: Player[], matches: Match[]) {
@@ -123,25 +123,25 @@ export class HighlightService {
       //   description: `Longest match (${longest.length})`
       // },
       {
-        title: 'The One True God',
+        title: 'One True God',
         profilePic: adKing.profilePictureUrl,
         subtitle: adKing.steamName,
         image: 'assets/images/zeus_god.png',
-        description: `Highest Ability Draft Winrate (${this.getRandKingWinrate(adKing)}%)`
+        description: `Most Ability Draft Wins (${this.getAdKingWins(adKing)})`
       },
       {
         title: 'Can We Play Regular For Once?',
         profilePic: normKing.profilePictureUrl,
         subtitle: normKing.steamName,
         image: 'assets/images/tango.png',
-        description: `Highest Regular Dota Winrate (${this.getNormKingWinrate(normKing)}%)`
+        description: `Most "Regular" Dota Wins (${this.getNormKingWins(normKing)})`
       },
       {
         title: 'Lord of the Chaos',
         profilePic: randKing.profilePictureUrl,
         subtitle: randKing.steamName,
         image: 'assets/images/goofy.png',
-        description: `Highest Winrate for Random Modes (${this.getRandKingWinrate(randKing)}%)`
+        description: `Most "Random" Dota Wins (${this.getRandKingWins(randKing)})`
       },
       {
         title: 'Participation Trophy',

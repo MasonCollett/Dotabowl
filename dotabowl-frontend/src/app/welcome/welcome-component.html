@@ -1,7 +1,7 @@
 <div class="home-container text-center flex-column justify-content-center">
 
   <div class="hero">
-    <img src="assets/images/dota_logo.png" alt="Dotabowl Logo" class="hero-logo mb-3">
+    <img src="assets/images/dota_logo.png" alt="Dotabowl Logo" class="hero-logo mb-3" style="--divider-logo-shadow: rgba(255, 0, 0, 0.6)">
     <h1 class="display-4 dota-font text-light mb-2">
       Welcome to <span class="d-none d-sm-inline">Dotabowl</span>
       <span class="d-inline d-sm-none"><br>Dotabowl</span>
@@ -11,19 +11,19 @@
     </p>
 
     <div class="hero-buttons">
-      <button mat-raised-button color="accent" routerLink="/players" class="me-3">
+      <button mat-raised-button color="accent" routerLink="/players" class="me-3 hero-btn">
         View Players
       </button>
-      <button mat-raised-button color="primary" routerLink="/matches">
+      <button mat-raised-button color="primary" routerLink="/matches" class="hero-btn">
         Add Match
       </button>
     </div>
   </div>
 
-<div class="divider">
+<div class="divider" style="--divider-color: #8c0000; --divider-image: url('assets/images/dota_logo.png')">
   <span class="line"></span>
   <span class="logo">
-    <img src="assets/images/dota_logo.png" alt="Dotabowl Logo" class="hero-logo">
+    <img src="assets/images/dota_logo.png" alt="Dotabowl Logo" class="hero-logo" style="--divider-logo-shadow: rgba(255, 0, 0, 0.6)">
   </span>
   <span class="line"></span>
 </div>
@@ -31,7 +31,7 @@
 
 <div class="container recent-section">
   <div class="row justify-content-center">
-    <div class="col-md-4 mb-4" *ngFor="let card of cards">
+    <div class="col-md-4 mb-4 col-sm-1" *ngFor="let card of cards">
       <mat-card class="highlight-card p-3">
         <!-- Card header / title -->
         <div class="card-header mb-3">
@@ -56,7 +56,9 @@
         <!-- Description -->
         <div class="row">
           <div class="col">
-            <p class="description-text mt-2">{{ card.description }}</p>
+            <mat-card-content>
+              <p class="description-text mt-2">{{ card.description }}</p>
+            </mat-card-content>
           </div>
         </div>
       </mat-card>
@@ -64,31 +66,56 @@
   </div>
 </div>
 
+<div class="divider" style="--divider-color: #ffb938; --divider-image: url('assets/images/aegis.png')">
+  <span class="line"></span>
+  <span class="logo">
+    <img src="assets/images/aegis.png" alt="Dotabowl Logo" class="hero-logo"  style="--divider-logo-shadow: rgba(249, 214, 42, 0.6)">
+  </span>
+  <span class="line"></span>
+</div>
 
-  <div class="container recent-section event-stats">
-    <mat-card class="highlight-card p-4 mb-4">
+<div class="container recent-section event-stats">
+  <div class="stats-row">
+    <mat-card class="highlight-card  mb-4">
       <div class="card-header">
-        <div class="title-text h4" *ngIf="totalMatchesPlayed$ | async as totalMatches">
-          {{ totalMatches }}
+        <div *ngIf="totalMatchesPlayed$ | async as totalMatches">
+          <h2 class="event-title-text">
+            {{ totalMatches }}
+          </h2>
         </div>
-        <h5 class="steam-name">Matches</h5>
-       </div>
-    </mat-card>
-    <mat-card class="highlight-card p-4 mb-4">
-      <div class="card-header">
-        <div class="title-text h4" *ngIf="totalGameTime$ | async as totalTime">
-          {{ totalTime.hours }}h {{ totalTime.minutes }}m
-        </div>
-        <h5 class="steam-name">Man Hours</h5>
+        <h5 class="event-stats-font">Matches</h5>
       </div>
     </mat-card>
-    <mat-card class="highlight-card p-4 mb-4">
+
+    <mat-card class="highlight-card  mb-4">
       <div class="card-header">
-        <div class="title-text h4">
-          1
+        <div *ngIf="totalGameTime$ | async as totalTime">
+          <h2 class="event-title-text" >
+            {{ totalTime.hours }}h {{ totalTime.minutes }}m
+          </h2>
         </div>
-        <h5 class="steam-name">Weekend With Friends</h5>
+        <h5 class="event-stats-font">Man Hours</h5>
+      </div>
+    </mat-card>
+
+    <mat-card class="highlight-card highlight-special mb-4">
+      <div class="card-header">
+        <div>
+          <h1 class="event-title-text" >1</h1>
+        </div>
+        <h5 class="event-stats-font">Weekend With Friends</h5>
       </div>
     </mat-card>
   </div>
+</div>
+
+<div class="divider" style="--divider-color: #8c0000; --divider-image: url('assets/images/rosh.png')">
+  <span class="line"></span>
+  <span class="logo">
+    <img src="assets/images/rosh.png" alt="Dotabowl Logo" class="hero-logo"  style="--divider-logo-shadow: rgba(255, 0, 0, 0.6)">
+  </span>
+  <span class="line"></span>
+</div>
+
+<div style="height: 45px;"></div>
 

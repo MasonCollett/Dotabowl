@@ -26,6 +26,7 @@
 
 .db-navbar img {
   display: block;
+  filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.6));
 }
 
 .nav-link {
