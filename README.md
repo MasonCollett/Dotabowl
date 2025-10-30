@@ -6,7 +6,7 @@ Dotabowl (the website) is a player stats and match-tracking hub for **Dotabowl**
 
 ## What it does
 
-Matches are loaded added manually during Dotabowl.  
+Matches are loaded manually during Dotabowl.  
 Player statistics are updated live, event leaderboards refresh dynamically, and achievements  
 are awarded as players compete.  
 
