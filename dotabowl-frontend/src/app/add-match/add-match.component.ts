@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-add-match',
@@ -48,7 +49,7 @@ export class AddMatchComponent {
   constructor(private matchesService: MatchService, private http: HttpClient) {}
 
   ngOnInit() {
-    this.http.get<any[]>('/api/players').subscribe({
+    this.http.get<any[]>(`${environment.apiUrl}/players`).subscribe({
       next: players => this.players = players,
       error: err => console.error('Failed to load players', err)
     });
