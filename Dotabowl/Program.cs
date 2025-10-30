@@ -5,11 +5,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
-var connectionString = Environment.GetEnvironmentVariable("DefaultConnection")
-                       ?? throw new InvalidOperationException("DefaultConnection not set");
+//var connectionString = Environment.GetEnvironmentVariable("DefaultConnection")
+//                       ?? throw new InvalidOperationException("DefaultConnection not set");
 
 builder.Services.AddDbContext<DotabowlContext>(options =>
-    options.UseSqlServer(connectionString, sqlOptions => sqlOptions.EnableRetryOnFailure()));
+    options.UseSqlServer("Server=tcp:dotabowl-server-west-3.database.windows.net,1433;Initial Catalog=DotabowlDB;Persist Security Info=False;User ID=dotabowlAdmin;Password=Pumpkin1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"));
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
