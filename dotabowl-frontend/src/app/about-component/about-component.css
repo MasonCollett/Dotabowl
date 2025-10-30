@@ -18,6 +18,7 @@
     margin: 0 auto;
     border: 10px double #bd6902;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); 
+    position: relative;
 }
 
 .about-container h1 {
@@ -84,4 +85,24 @@
   height: 200px;
   width: auto;
   content: var(--divider-image);
+}
+
+.git{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-right: 113px;
+}
+
+.gittext{
+  position: absolute;
+  bottom: 0;
+  padding-left: 2px;
+  color: #f87706;
+  text-decoration: underline;
+}
+
+.gitlogo{
+  height:25px;
+  width:25px;
 }
