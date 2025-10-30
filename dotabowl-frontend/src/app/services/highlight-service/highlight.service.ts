@@ -156,10 +156,10 @@ export class HighlightService {
         description: `Most "Random" Dota Wins (${this.getRandKingWins(randKing)})`
       },
       {
-        title: 'Participation Trophy',
+        title: 'Thanks For Coming',
         profilePic: loser.profilePictureUrl,
         subtitle: loser.steamName,
-        image: 'assets/images/participation.webp',
+        image: 'assets/images/heart.png',
         description: `Most Losses (${loser.totalLosses})`
       },
       {
