@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
     MatInputModule,
     CommonModule,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
   ],
   templateUrl: './app.html',
   styleUrls: ['./app.css']        
