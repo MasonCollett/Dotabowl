@@ -16,7 +16,6 @@ namespace Dotabowl.Api.Data
         public DbSet<Match> Matches { get; set; }
         public DbSet<MatchParticipant> MatchParticipants { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
