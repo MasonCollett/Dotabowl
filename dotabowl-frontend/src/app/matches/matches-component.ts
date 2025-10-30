@@ -6,6 +6,7 @@ import { AddMatchComponent } from '../add-match/add-match.component';
 import { HttpClient } from '@angular/common/http';
 import { combineLatest, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-matches',
@@ -23,7 +24,8 @@ export class MatchesComponent implements OnInit {
   constructor(private matchService: MatchService, private http: HttpClient) {}
 
   ngOnInit() {
-    this.http.get<{ id: number; name: string }[]>('/api/players').subscribe({
+    // Use environment.apiUrl instead of hardcoded '/api/players'
+    this.http.get<{ id: number; name: string }[]>(`${environment.apiUrl}/players`).subscribe({
       next: data => this.playersSubject.next(data),
       error: err => console.error('Failed to load players', err)
     });
@@ -63,8 +65,6 @@ export class MatchesComponent implements OnInit {
     return (match.direPlayers || []).map(p => p.playerName).sort().join(', ');
   }
 
-//   typeOptions = ['Ability Draft', 'ADAR', 'All Pick', 'All Random', 'Captains Draft', 'Single Draft', 'Turbo']
-
   getTypeColor(type: string): string {
     switch(type) {
       case 'Ability Draft': return 'match-type-teal';
@@ -79,11 +79,10 @@ export class MatchesComponent implements OnInit {
     }
   }
 
-    getWinnerColor(type: string): string {
+  getWinnerColor(type: string): string {
     switch(type) {
       case 'Dire': return 'winner-dire';
       case 'Radiant': return 'winner-radiant';
-
       default: return 'match-type-white';
     }
   }
