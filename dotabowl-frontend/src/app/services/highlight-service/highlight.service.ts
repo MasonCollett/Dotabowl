@@ -125,6 +125,13 @@ export class HighlightService {
     return (player.adarWins + player.allRandomWins + player.singleDraftWins);
   }
 
+  getName(player: Player): string {
+    if (player.steamName === 'Actual Waste of Time') {
+      return `${player.steamName}™`;
+    }
+    return player.steamName;
+  }
+
   getHighlights(players: Player[], matches: Match[]) {
     const loser = this.getParticipationTrophy(players);
     const mvp = this.getMvp(players);
@@ -137,42 +144,42 @@ export class HighlightService {
       {
         title: 'One True God',
         profilePic: adKing.profilePictureUrl,
-        subtitle: adKing.steamName,
+        subtitle: this.getName(adKing),
         image: 'assets/images/zeus_god.png',
         description: `Most Ability Draft Wins (${this.getAdKingWins(adKing)})`
       },
       {
         title: 'Can We Play Regular For Once?',
         profilePic: normKing.profilePictureUrl,
-        subtitle: normKing.steamName,
+        subtitle: this.getName(normKing),
         image: 'assets/images/sven.png',
         description: `Most "Regular" Dota Wins (${this.getNormKingWins(normKing)})`
       },
       {
         title: 'Lord of the Chaos',
         profilePic: randKing.profilePictureUrl,
-        subtitle: randKing.steamName,
+        subtitle: this.getName(randKing),
         image: 'assets/images/knight.png',
         description: `Most "Random" Dota Wins (${this.getRandKingWins(randKing)})`
       },
       {
         title: 'Thanks For Coming',
         profilePic: loser.profilePictureUrl,
-        subtitle: loser.steamName,
+        subtitle: this.getName(loser),
         image: 'assets/images/heart.png',
         description: `Most Losses (${loser.totalLosses})`
       },
       {
         title: 'The Secret Ingredient',
         profilePic: mvp.profilePictureUrl,
-        subtitle: mvp.steamName,
+        subtitle: this.getName(mvp),
         image: 'assets/images/ingredient.png',
         description: `Highest Overall Winrate (${mvp.winRate}%)`
       },
       {
         title: 'Please Touch Grass',
         profilePic: degen.profilePictureUrl,
-        subtitle: degen.steamName,
+        subtitle: this.getName(degen),
         image: 'assets/images/tango.png',
         description: `Most Game Time (${this.minutesToTimePipe.transform(degen.totalGameTime)})`
       }
