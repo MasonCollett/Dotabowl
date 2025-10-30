@@ -61,6 +61,8 @@ jobs:
         with:
           app-name: 'dotabowl-backend'
           slot-name: 'Production'
-          package: .
+          package: ${{ env.DOTNET_ROOT }}/myapp
+
 
           
+
