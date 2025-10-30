@@ -74,6 +74,7 @@ export class MatchesComponent implements OnInit {
       case 'Captains Draft': return 'match-type-orange';
       case 'Single Draft': return 'match-type-purple';
       case 'Turbo': return 'match-type-rainbow';
+      case 'Random Draft': return 'match-type-peach';
       default: return 'match-type-white';
     }
   }
