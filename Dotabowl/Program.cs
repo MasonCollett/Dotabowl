@@ -17,16 +17,12 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 
 // Use the connection string from Configuration/ConnectionStrings
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = Environment.GetEnvironmentVariable("DefaultConnection")
+                       ?? throw new InvalidOperationException("DefaultConnection not set");
 
 builder.Services.AddDbContext<DotabowlContext>(options =>
-    options.UseSqlServer(connectionString, sqlOptions =>
-    {
-        sqlOptions.EnableRetryOnFailure(
-            maxRetryCount: 5,
-            maxRetryDelay: TimeSpan.FromSeconds(10),
-            errorNumbersToAdd: null);
-    }));
+    options.UseSqlServer(connectionString, sqlOptions => sqlOptions.EnableRetryOnFailure()));
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
