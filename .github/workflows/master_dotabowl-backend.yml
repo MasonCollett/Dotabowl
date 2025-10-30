@@ -24,7 +24,7 @@ jobs:
           dotnet-version: '9.x'
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release
+        run: dotnet build ./dotabowl/Dotabowl.csproj --configuration Release
 
       - name: dotnet publish
         run: dotnet publish -c Release -o "${{env.DOTNET_ROOT}}/myapp"
@@ -34,7 +34,7 @@ jobs:
         with:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
-
+          
   deploy:
     runs-on: windows-latest
     needs: build
@@ -62,4 +62,10 @@ jobs:
           app-name: 'dotabowl-backend'
           slot-name: 'Production'
           package: .
+
           
+
+
+
+
+
