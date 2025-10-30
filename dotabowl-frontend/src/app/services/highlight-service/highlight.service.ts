@@ -145,14 +145,14 @@ export class HighlightService {
         title: 'Can We Play Regular For Once?',
         profilePic: normKing.profilePictureUrl,
         subtitle: normKing.steamName,
-        image: 'assets/images/tango.png',
+        image: 'assets/images/sven.png',
         description: `Most "Regular" Dota Wins (${this.getNormKingWins(normKing)})`
       },
       {
         title: 'Lord of the Chaos',
         profilePic: randKing.profilePictureUrl,
         subtitle: randKing.steamName,
-        image: 'assets/images/goofy.png',
+        image: 'assets/images/knight.png',
         description: `Most "Random" Dota Wins (${this.getRandKingWins(randKing)})`
       },
       {
@@ -173,7 +173,7 @@ export class HighlightService {
         title: 'Please Touch Grass',
         profilePic: degen.profilePictureUrl,
         subtitle: degen.steamName,
-        image: 'assets/images/grass.png',
+        image: 'assets/images/tango.png',
         description: `Most Game Time (${this.minutesToTimePipe.transform(degen.totalGameTime)})`
       }
     ];
