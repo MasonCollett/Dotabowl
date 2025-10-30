@@ -5,8 +5,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { HighlightService } from '../services/highlight-service/highlight.service';
 import { PlayerService } from '../services/player-service/player-service';
-import { MatchService } from '../services/match-service/match-service';
-import { combineLatest, map, Observable } from 'rxjs';
+import { Match, MatchService } from '../services/match-service/match-service';
+import { combineLatest, map, Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -22,11 +22,9 @@ import { combineLatest, map, Observable } from 'rxjs';
 })
 export class WelcomeComponent implements OnInit {
   cards: any[] = [];
-  totalMatchesPlayed$!: Observable<number>;
-  totalGameTime$!: Observable<{ hours: number; minutes: number }>;
-  totalGameTimeHours$!: Observable<number>;
-
-
+  totalMatchesPlayed$: Observable<number> = of(0);
+  totalGameTime$: Observable<{ hours: number; minutes: number }> = of({ hours: 0, minutes: 0 });
+  totalGameTimeHours$: Observable<number> = of(0);
 
   constructor(
     private highlightService: HighlightService,
@@ -49,7 +47,6 @@ export class WelcomeComponent implements OnInit {
       })
     );
 
-
     this.totalGameTime$ = this.playerService.getPlayers().pipe(
       map(players => {
         const totalMinutesDecimal = players.reduce((sum, player) => {
@@ -67,6 +64,8 @@ export class WelcomeComponent implements OnInit {
       this.playerService.getPlayers(),
       this.matchService.getMatches()
     ]).subscribe(([players, matches]) => {
+          if (!players.length) players = [this.highlightService.getDummy()];
+          if (!matches.length) matches = [this.matchService.getDummyMatch()];
       this.cards = this.highlightService.getHighlights(players, matches);
     });
   }

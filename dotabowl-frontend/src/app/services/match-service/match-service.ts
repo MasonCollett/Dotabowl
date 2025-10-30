@@ -57,4 +57,19 @@ export class MatchService {
   getMatches(): Observable<Match[]> {
     return this.http.get<Match[]>(this.apiUrl);
   }
+
+  getDummyMatch(){
+    return {
+      id: 0,
+      length: '0',            
+      type: 'Unknown',
+      winner: 'None',
+      radiantKills: 0,
+      direKills: 0,
+      date: new Date().toISOString(),
+      participants: [],
+      radiantPlayers: [],
+      direPlayers: []
+    } as Match;
+  }
 }

@@ -86,7 +86,7 @@
       <div class="card-header">
         <div *ngIf="totalMatchesPlayed$ | async as totalMatches">
           <h2 class="event-title-text">
-            {{ totalMatches }}
+            {{ totalMatches ?? 0 }}
           </h2>
         </div>
         <h5 class="event-stats-font">Matches Played</h5>
@@ -97,7 +97,7 @@
       <div class="card-header">
         <div *ngIf="totalGameTimeHours$ | async as totalTime">
           <h2 class="event-title-text" >
-            {{ totalTime }}
+            {{ totalTime ?? 0}}
           </h2>
         </div>
         <h5 class="event-stats-font">Man Hours</h5>

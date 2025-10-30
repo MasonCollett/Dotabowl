@@ -2,11 +2,10 @@
 
 <h2 class="match-history-title">Match History</h2>
 
-<div *ngIf="matches?.length === 0">
-  No matches yet.
-</div>
+
 
 <div class="container-fluid">
+  
   <div class="frosted">
     <div class="container">
   <table class="table table-responsive align-middle" id="matchHistory">
@@ -33,6 +32,10 @@
       </tr>
     </tbody>
   </table>
+
+  <div *ngIf="matches?.length === 0">
+    No matches yet.
+  </div>
 </div>
 </div>
 </div>

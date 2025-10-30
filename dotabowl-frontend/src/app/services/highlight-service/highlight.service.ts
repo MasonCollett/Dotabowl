@@ -9,28 +9,41 @@ import { MinutesToTimePipe } from '../../misc/minutes-to-time-pipe';
 export class HighlightService {
   private minutesToTimePipe = new MinutesToTimePipe();
 
-  getLongestGame(matches: Match[]) {
-    return matches.reduce((longest, match) =>
-      match.length > longest.length ? match : longest
-    );
-  }
 
   getParticipationTrophy(players: Player[]) {
-    return players.reduce((mostLosses, player) =>
+    if (!players || players.length === 0) return this.getDummy();
+    let best = players.reduce((mostLosses, player) =>
       player.totalLosses > mostLosses.totalLosses ? player : mostLosses
     );
+    if (!best.totalLosses || best.totalLosses === 0) {
+      best = this.getDummy();
+    }
+
+  return best;
   }
 
   getMvp(players: Player[]) {
-    return players.reduce((best, player) =>
+    if (!players || players.length === 0) return this.getDummy();
+    let best = players.reduce((best, player) =>
       player.winRate > best.winRate ? player : best
     );
+    if (!best.winRate || best.winRate === 0) {
+      best = this.getDummy();
+    }
+
+  return best;
   }
 
   getDegen(players: Player[]) {
-    return players.reduce((best, player) =>
+    if (!players || players.length === 0) return this.getDummy();
+    let best = players.reduce((best, player) =>
       player.totalGameTime > best.totalGameTime ? player : best
     );
+    if (!best.totalGameTime || best.totalGameTime === 0) {
+      best = this.getDummy();
+    }
+
+  return best;
   }
 
   getDummy(){
@@ -46,10 +59,15 @@ export class HighlightService {
         totalWins: 0,
         totalLosses: 0,
         adWins: 0,
+        adGames: 0,
+        allPickWins: 0,
+        captDraftWins: 0,
+        randomDraftWins: 0,
     } as Player;
   }
 
   getRandKing(players: Player[]) {
+    if (!players || players.length === 0) return this.getDummy();
     const validPlayers = players.filter(player => 
       (player.adarGames + player.allRandomGames + player.singleDraftGames) > 0
     );
@@ -70,6 +88,7 @@ export class HighlightService {
   }
 
   getNormKing(players: Player[]) {
+    if (!players || players.length === 0) return this.getDummy();
     const validPlayers = players.filter(player => 
       (player.allPickGames + player.captDraftGames + player.randomDraftGames) > 0
     );
@@ -83,6 +102,7 @@ export class HighlightService {
   }
 
   getAdKing(players: Player[]){
+    if (!players || players.length === 0) return this.getDummy();
     const validPlayers = players.filter(player => 
       (player.adGames) > 0
     );
@@ -107,7 +127,6 @@ export class HighlightService {
   }
 
   getHighlights(players: Player[], matches: Match[]) {
-    const longest = this.getLongestGame(matches);
     const loser = this.getParticipationTrophy(players);
     const mvp = this.getMvp(players);
     const degen = this.getDegen(players);
@@ -116,12 +135,6 @@ export class HighlightService {
     const adKing = this.getAdKing(players);
 
     return [
-      // {
-      //   title: 'Why Do My Eyes Hurt',
-      //   subtitle: `${longest.length} minutes`,
-      //   image: 'assets/images/clock.jpg',
-      //   description: `Longest match (${longest.length})`
-      // },
       {
         title: 'One True God',
         profilePic: adKing.profilePictureUrl,
