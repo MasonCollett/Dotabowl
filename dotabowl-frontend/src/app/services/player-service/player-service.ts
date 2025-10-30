@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment'
 
 export interface Player {
   name: string;
@@ -41,7 +42,7 @@ export interface Player {
 })
 export class PlayerService {
 
-  private apiUrl = '/api/players';
+  private apiUrl = `${environment.apiUrl}/players`;
 
   constructor(private http: HttpClient) { }
 

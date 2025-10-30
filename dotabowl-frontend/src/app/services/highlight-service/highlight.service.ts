@@ -9,7 +9,6 @@ import { MinutesToTimePipe } from '../../misc/minutes-to-time-pipe';
 export class HighlightService {
   private minutesToTimePipe = new MinutesToTimePipe();
 
-
   getParticipationTrophy(players: Player[]) {
     if (!players || players.length === 0) return this.getDummy();
     let best = players.reduce((mostLosses, player) =>
