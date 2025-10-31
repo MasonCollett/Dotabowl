@@ -156,7 +156,7 @@ export class HighlightService {
         description: `Most "Regular" Dota Wins (${this.getNormKingWins(normKing)})`
       },
       {
-        title: 'Lord of the Chaos',
+        title: 'Let Chaos Reign!',
         profilePic: randKing.profilePictureUrl,
         subtitle: this.getName(randKing),
         image: 'assets/images/knight.png',
