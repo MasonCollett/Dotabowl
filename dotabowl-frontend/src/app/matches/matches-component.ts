@@ -68,10 +68,10 @@ export class MatchesComponent implements OnInit {
   getTypeColor(type: string): string {
     switch(type) {
       case 'Ability Draft': return 'match-type-teal';
-      case 'ADAR': return 'match-type-green';
+      case 'ADAR': return 'match-type-orange';
       case 'All Pick': return 'match-type-yellow';
       case 'All Random': return 'match-type-pink';
-      case 'Captains Draft': return 'match-type-orange';
+      case 'Captains Draft': return 'match-type-green';
       case 'Single Draft': return 'match-type-purple';
       case 'Turbo': return 'match-type-rainbow';
       case 'Random Draft': return 'match-type-peach';
