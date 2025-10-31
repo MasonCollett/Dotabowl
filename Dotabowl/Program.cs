@@ -9,8 +9,15 @@ builder.Services.AddControllers();
 //                       ?? throw new InvalidOperationException("DefaultConnection not set");
 
 builder.Services.AddDbContext<DotabowlContext>(options =>
-    options.UseSqlServer("Server=tcp:dotabowl-server-west-3.database.windows.net,1433;Initial Catalog=DotabowlDB;Persist Security Info=False;User ID=dotabowlAdmin;Password=Pumpkin1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"));
-
+    options.UseSqlServer("Server=tcp:dotabowl-server-west-3.database.windows.net,1433;Initial Catalog=DotabowlDB;Persist Security Info=False;User ID=dotabowlAdmin;Password=Pumpkin1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+sqlOptions =>
+{
+    // Retries on transient errors like “Database not available”
+    sqlOptions.EnableRetryOnFailure(
+        maxRetryCount: 5,
+        maxRetryDelay: TimeSpan.FromSeconds(10),
+        errorNumbersToAdd: null);
+}));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
