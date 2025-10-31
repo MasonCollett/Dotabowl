@@ -177,10 +177,10 @@ export class HighlightService {
         description: `Highest Overall Winrate (${mvp.winRate}%)`
       },
       {
-        title: 'Please Touch Grass',
+        title: 'What Year Is It?',
         profilePic: degen.profilePictureUrl,
         subtitle: this.getName(degen),
-        image: 'assets/images/tango.png',
+        image: 'assets/images/timezone.png',
         description: `Most Game Time (${this.minutesToTimePipe.transform(degen.totalGameTime)})`
       }
     ];
