@@ -76,6 +76,7 @@ export class PlayersComponent implements OnInit {
 
   ngOnInit(): void {
     this.playerService.getPlayers().subscribe(players => {
+      players.sort((a, b) => b.winRate - a.winRate);
       this.dataSource.data = players;
     });
   }
