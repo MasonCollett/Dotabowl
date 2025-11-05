@@ -34,6 +34,7 @@ export class HighlightService {
   private getTopPlayers(
     players: Player[],
     scoreFn: (p: Player) => number,
+    gamesFn?: (p: Player) => number,
     filterFn?: (p: Player) => boolean
   ): Player[] {
     if (!players || players.length === 0) return [this.getDummy()];
@@ -54,7 +55,25 @@ export class HighlightService {
       }
     }
 
-    // If there’s a tie or no top player, return a single dummy player
+    // If tie and we have a gamesFn, resolve by most games
+    if (topPlayers.length > 1 && gamesFn) {
+      let maxGames = -Infinity;
+      let resolvedPlayers: Player[] = [];
+
+      for (const player of topPlayers) {
+        const games = gamesFn(player) || 0;
+        if (games > maxGames) {
+          maxGames = games;
+          resolvedPlayers = [player];
+        } else if (games === maxGames) {
+          resolvedPlayers.push(player);
+        }
+      }
+
+      topPlayers = resolvedPlayers;
+    }
+
+    // Still tie or no top player → return dummy
     if (topPlayers.length !== 1) return [this.getDummy()];
 
     return topPlayers;
@@ -64,7 +83,8 @@ export class HighlightService {
     return this.getTopPlayers(
       players,
       p => (p.adarWins + p.allRandomWins + p.singleDraftWins) /
-           (p.adarGames + p.allRandomGames + p.singleDraftGames),
+          (p.adarGames + p.allRandomGames + p.singleDraftGames),
+      p => p.adarGames + p.allRandomGames + p.singleDraftGames,
       p => (p.adarGames + p.allRandomGames + p.singleDraftGames) > 3
     );
   }
@@ -73,6 +93,7 @@ export class HighlightService {
     return this.getTopPlayers(
       players,
       p => p.adWins / p.adGames,
+      p => p.adGames,
       p => p.adGames > 3
     );
   }
@@ -81,21 +102,35 @@ export class HighlightService {
     return this.getTopPlayers(
       players,
       p => (p.allPickWins + p.captDraftWins + p.randomDraftWins) /
-           (p.allPickGames + p.captDraftGames + p.randomDraftGames),
+          (p.allPickGames + p.captDraftGames + p.randomDraftGames),
+      p => p.allPickGames + p.captDraftGames + p.randomDraftGames,
       p => (p.allPickGames + p.captDraftGames + p.randomDraftGames) > 3
     );
   }
 
   getParticipationTrophy(players: Player[]): Player[] {
-    return this.getTopPlayers(players, p => p.totalLosses || 0);
+    return this.getTopPlayers(
+      players,
+      p => p.totalLosses || 0
+      // no gamesFn needed for losses
+    );
   }
 
   getMvps(players: Player[]): Player[] {
-    return this.getTopPlayers(players, p => p.winRate || 0);
+    return this.getTopPlayers(
+      players,
+      // scoreFn: use winRate if defined, else 0
+      p => (p.winRate || 0),
+      // gamesFn: total games as tie-breaker
+      p => (p.totalWins || 0) + (p.totalLosses || 0)
+    );
   }
 
   getDegens(players: Player[]): Player[] {
-    return this.getTopPlayers(players, p => p.totalGameTime || 0);
+    return this.getTopPlayers(
+      players,
+      p => p.totalGameTime || 0
+    );
   }
 
   getAdKingWinrates(players: Player[]): string {
