@@ -7,6 +7,7 @@ import { HighlightService } from '../services/highlight-service/highlight.servic
 import { PlayerService } from '../services/player-service/player-service';
 import { Match, MatchService } from '../services/match-service/match-service';
 import { combineLatest, map, Observable, of } from 'rxjs';
+import { PlayKickOnClick } from '../directives/play-kick-on-click';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,8 @@ import { combineLatest, map, Observable, of } from 'rxjs';
     CommonModule,
     RouterModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    PlayKickOnClick
   ],
   templateUrl: './welcome-component.html',
   styleUrl: './welcome-component.css'

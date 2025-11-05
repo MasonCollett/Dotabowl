@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { environment } from '../../environments/environment';
+import { PlayKickOnClick } from '../directives/play-kick-on-click';
 
 @Component({
   selector: 'app-add-match',
@@ -16,7 +17,9 @@ import { environment } from '../../environments/environment';
     CommonModule,    
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule],
+    MatSelectModule,
+    PlayKickOnClick
+  ],
   templateUrl: './add-match.component.html',
   styleUrl: './add-match.component.css',
 })

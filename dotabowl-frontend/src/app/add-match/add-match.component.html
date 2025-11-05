@@ -160,7 +160,7 @@
                       [checked]="radiantPlayerIds.includes(player.id)"
                       [disabled]="(!radiantPlayerIds.includes(player.id) && radiantPlayerIds.length >= 5) || direPlayerIds.includes(player.id)"
                     >
-                    <img [src]="player.profilePictureUrl" alt="{{player.name}}" class="player-img">
+                    <img [src]="player.profilePictureUrl" alt="{{player.name}}" class="player-img" appPlayKickOnClick [soundSrc]="'assets/sounds/kick.mp3'">
                     {{ player.name }}
                   </label>
                 </ul>
@@ -182,7 +182,7 @@
                     [checked]="direPlayerIds.includes(player.id)"
                     [disabled]="(!direPlayerIds.includes(player.id) && direPlayerIds.length >= 5) || radiantPlayerIds.includes(player.id)"
                   >
-                  <img [src]="player.profilePictureUrl" alt="{{player.name}}" class="player-img">
+                  <img [src]="player.profilePictureUrl" alt="{{player.name}}" class="player-img" appPlayKickOnClick [soundSrc]="'assets/sounds/kick.mp3'">
 
                     {{ player.name }}
                   </label>

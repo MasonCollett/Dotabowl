@@ -4,6 +4,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { Player, PlayerService } from '../services/player-service/player-service';
 import { MinutesToTimePipe } from '../misc/minutes-to-time-pipe';
+import { PlayKickOnClick } from '../directives/play-kick-on-click';
 
 @Component({
   selector: 'app-players',
@@ -12,7 +13,8 @@ import { MinutesToTimePipe } from '../misc/minutes-to-time-pipe';
     CommonModule,
     MatTableModule,
     MatSortModule,
-    MinutesToTimePipe
+    MinutesToTimePipe,
+    PlayKickOnClick
   ],
   templateUrl: './players.component.html',
   styleUrls: ['./players.component.css']
