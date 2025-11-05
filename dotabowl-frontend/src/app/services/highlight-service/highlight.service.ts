@@ -85,7 +85,7 @@ export class HighlightService {
       p => (p.adarWins + p.allRandomWins + p.singleDraftWins) /
           (p.adarGames + p.allRandomGames + p.singleDraftGames),
       p => p.adarGames + p.allRandomGames + p.singleDraftGames,
-      p => (p.adarGames + p.allRandomGames + p.singleDraftGames) > 3
+      p => (p.adarGames + p.allRandomGames + p.singleDraftGames) >= 3
     );
   }
 
@@ -94,7 +94,7 @@ export class HighlightService {
       players,
       p => p.adWins / p.adGames,
       p => p.adGames,
-      p => p.adGames > 3
+      p => p.adGames >= 3
     );
   }
 
@@ -104,7 +104,7 @@ export class HighlightService {
       p => (p.allPickWins + p.captDraftWins + p.randomDraftWins) /
           (p.allPickGames + p.captDraftGames + p.randomDraftGames),
       p => p.allPickGames + p.captDraftGames + p.randomDraftGames,
-      p => (p.allPickGames + p.captDraftGames + p.randomDraftGames) > 3
+      p => (p.allPickGames + p.captDraftGames + p.randomDraftGames) >= 3
     );
   }
 
@@ -158,13 +158,22 @@ export class HighlightService {
     return player.steamName === 'Actual Waste of Time' ? `${player.steamName}™` : player.steamName;
   }
 
-  getHighlights(players: Player[]) {
-    const losers = this.getParticipationTrophy(players);
-    const mvps = this.getMvps(players);
-    const degens = this.getDegens(players);
-    const randKings = this.getRandKings(players);
-    const normKings = this.getNormKings(players);
-    const adKings = this.getAdKings(players);
+  getHighlights(players: Player[], matches: Match[]) {
+    let losers = [this.getDummy()];
+    let mvps = [this.getDummy()];
+    let degens = [this.getDummy()];
+    let randKings = [this.getDummy()];
+    let normKings = [this.getDummy()];
+    let adKings = [this.getDummy()];
+
+    if (matches.length > 1) {
+      losers = this.getParticipationTrophy(players);
+      mvps = this.getMvps(players);
+      degens = this.getDegens(players);
+      randKings = this.getRandKings(players);
+      normKings = this.getNormKings(players);
+      adKings = this.getAdKings(players);
+    }
 
     return [
       {
