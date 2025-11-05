@@ -68,7 +68,7 @@ export class HighlightService {
   getRandKing(players: Player[]) {
     if (!players || players.length === 0) return this.getDummy();
     const validPlayers = players.filter(player => 
-      (player.adarGames + player.allRandomGames + player.singleDraftGames) > 0
+      (player.adarGames + player.allRandomGames + player.singleDraftGames) > 3
     );
 
     if (validPlayers.length === 0) return this.getDummy();
@@ -89,40 +89,44 @@ export class HighlightService {
   getNormKing(players: Player[]) {
     if (!players || players.length === 0) return this.getDummy();
     const validPlayers = players.filter(player => 
-      (player.allPickGames + player.captDraftGames + player.randomDraftGames) > 0
+      (player.allPickGames + player.captDraftGames + player.randomDraftGames) > 3
     );
 
     if (validPlayers.length === 0) return this.getDummy();
 
     return players.reduce((best, player) =>
-      (player.allPickWins + player.captDraftGames + player.randomDraftWins) > 
-      (best.allPickWins + best.captDraftGames + best.randomDraftWins) ? player : best
+      ((player.allPickWins + player.captDraftWins + player.randomDraftWins)/(player.allPickGames + player.captDraftGames + player.randomDraftGames)) > 
+      ((best.allPickWins + best.captDraftWins + best.randomDraftWins)/(best.allPickGames + best.captDraftGames + best.randomDraftGames)) ? player : best
     );
   }
 
   getAdKing(players: Player[]){
     if (!players || players.length === 0) return this.getDummy();
     const validPlayers = players.filter(player => 
-      (player.adGames) > 0
+      (player.adGames) > 3
     );
 
     if (validPlayers.length === 0) return this.getDummy();
 
     return players.reduce((best, player) =>
-      player.adWins > best.adWins  ? player : best
+      (player.adWins/player.adGames) > (best.adWins/best.adGames)  ? player : best
     );
   }
 
-  getAdKingWins(player: Player){
-    return player.adWins;
+  getAdKingWinrate(player: Player){
+    let winrate = ((player.adWins / player.adGames) * 100);
+    return winrate === 100 ? "100" : winrate.toFixed(1);
   }
 
-  getNormKingWins(player: Player){
-    return (player.allPickWins + player.captDraftGames + player.randomDraftWins);
+  getNormKingWinrate(player: Player){
+    let winrate = (((player.allPickWins + player.captDraftWins + player.randomDraftWins)/(player.allPickGames + player.captDraftGames + player.randomDraftGames))*100);
+    return winrate === 100 ? "100" : winrate.toFixed(1);
   }
 
-  getRandKingWins(player: Player){
-    return (player.adarWins + player.allRandomWins + player.singleDraftWins);
+  getRandKingWinrate(player: Player){
+    let winrate = (((player.adarWins + player.allRandomWins + player.singleDraftWins) /
+        (player.adarGames + player.allRandomGames + player.singleDraftGames))*100);
+    return winrate === 100 ? "100" : winrate.toFixed(1);
   }
 
   getName(player: Player): string {
@@ -146,21 +150,21 @@ export class HighlightService {
         profilePic: adKing.profilePictureUrl,
         subtitle: this.getName(adKing),
         image: 'assets/images/zeus_god.png',
-        description: `Most Ability Draft Wins (${this.getAdKingWins(adKing)})`
+        description: `Highest Ability Draft Winrate (${this.getAdKingWinrate(adKing)}%)`
       },
       {
         title: 'Can We Play Regular For Once?',
         profilePic: normKing.profilePictureUrl,
         subtitle: this.getName(normKing),
         image: 'assets/images/sven.png',
-        description: `Most "Regular" Dota Wins (${this.getNormKingWins(normKing)})`
+        description: `Highest "Regular" Dota Winrate (${this.getNormKingWinrate(normKing)}%)`
       },
       {
         title: 'Let Chaos Reign!',
         profilePic: randKing.profilePictureUrl,
         subtitle: this.getName(randKing),
         image: 'assets/images/knight.png',
-        description: `Most "Random" Dota Wins (${this.getRandKingWins(randKing)})`
+        description: `Highest "Random" Dota Winrate (${this.getRandKingWinrate(randKing)}%)`
       },
       {
         title: 'Thanks For Coming',
