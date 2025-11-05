@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Match } from '../match-service/match-service'; // adjust to your actual model paths
-import { Player } from '../player-service/player-service'; // adjust to your actual model paths
+import { Match } from '../match-service/match-service';
+import { Player } from '../player-service/player-service';
 import { MinutesToTimePipe } from '../../misc/minutes-to-time-pipe';
 
 @Injectable({
@@ -9,183 +9,184 @@ import { MinutesToTimePipe } from '../../misc/minutes-to-time-pipe';
 export class HighlightService {
   private minutesToTimePipe = new MinutesToTimePipe();
 
-  getParticipationTrophy(players: Player[]) {
-    if (!players || players.length === 0) return this.getDummy();
-    let best = players.reduce((mostLosses, player) =>
-      player.totalLosses > mostLosses.totalLosses ? player : mostLosses
-    );
-    if (!best.totalLosses || best.totalLosses === 0) {
-      best = this.getDummy();
-    }
-
-  return best;
-  }
-
-  getMvp(players: Player[]) {
-    if (!players || players.length === 0) return this.getDummy();
-    let best = players.reduce((best, player) =>
-      player.winRate > best.winRate ? player : best
-    );
-    if (!best.winRate || best.winRate === 0) {
-      best = this.getDummy();
-    }
-
-  return best;
-  }
-
-  getDegen(players: Player[]) {
-    if (!players || players.length === 0) return this.getDummy();
-    let best = players.reduce((best, player) =>
-      player.totalGameTime > best.totalGameTime ? player : best
-    );
-    if (!best.totalGameTime || best.totalGameTime === 0) {
-      best = this.getDummy();
-    }
-
-  return best;
-  }
-
-  getDummy(){
+  public getDummy(): Player {
     return {
-        steamName: 'No Player Yet',
-        profilePictureUrl: 'assets/images/dummy.png',
-        adarWins: 0,
-        allRandomWins: 0,
-        singleDraftWins: 0,
-        adarGames: 0,
-        allRandomGames: 0,
-        singleDraftGames: 0,
-        totalWins: 0,
-        totalLosses: 0,
-        adWins: 0,
-        adGames: 0,
-        allPickWins: 0,
-        captDraftWins: 0,
-        randomDraftWins: 0,
+      steamName: 'No Player Yet',
+      profilePictureUrl: 'assets/images/dummy.png',
+      adarWins: 0,
+      allRandomWins: 0,
+      singleDraftWins: 0,
+      adarGames: 0,
+      allRandomGames: 0,
+      singleDraftGames: 0,
+      totalWins: 0,
+      totalLosses: 0,
+      adWins: 0,
+      adGames: 0,
+      allPickWins: 0,
+      captDraftWins: 0,
+      randomDraftWins: 0,
+      totalGameTime: 0,
+      winRate: 0
     } as Player;
   }
 
-  getRandKing(players: Player[]) {
-    if (!players || players.length === 0) return this.getDummy();
-    const validPlayers = players.filter(player => 
-      (player.adarGames + player.allRandomGames + player.singleDraftGames) > 3
-    );
+  private getTopPlayers(
+    players: Player[],
+    scoreFn: (p: Player) => number,
+    filterFn?: (p: Player) => boolean
+  ): Player[] {
+    if (!players || players.length === 0) return [this.getDummy()];
 
-    if (validPlayers.length === 0) return this.getDummy();
+    const validPlayers = filterFn ? players.filter(filterFn) : players;
+    if (validPlayers.length === 0) return [this.getDummy()];
 
-    return validPlayers.reduce((best, player) => {
-      const playerWinrate = 
-        (player.adarWins + player.allRandomWins + player.singleDraftWins) /
-        (player.adarGames + player.allRandomGames + player.singleDraftGames);
+    let topPlayers: Player[] = [];
+    let topScore = -Infinity;
 
-      const bestWinrate = 
-        (best.adarWins + best.allRandomWins + best.singleDraftWins) /
-        (best.adarGames + best.allRandomGames + best.singleDraftGames);
-
-      return playerWinrate > bestWinrate ? player : best;
-    });
-  }
-
-  getNormKing(players: Player[]) {
-    if (!players || players.length === 0) return this.getDummy();
-    const validPlayers = players.filter(player => 
-      (player.allPickGames + player.captDraftGames + player.randomDraftGames) > 3
-    );
-
-    if (validPlayers.length === 0) return this.getDummy();
-
-    return players.reduce((best, player) =>
-      ((player.allPickWins + player.captDraftWins + player.randomDraftWins)/(player.allPickGames + player.captDraftGames + player.randomDraftGames)) > 
-      ((best.allPickWins + best.captDraftWins + best.randomDraftWins)/(best.allPickGames + best.captDraftGames + best.randomDraftGames)) ? player : best
-    );
-  }
-
-  getAdKing(players: Player[]){
-    if (!players || players.length === 0) return this.getDummy();
-    const validPlayers = players.filter(player => 
-      (player.adGames) > 3
-    );
-
-    if (validPlayers.length === 0) return this.getDummy();
-
-    return players.reduce((best, player) =>
-      (player.adWins/player.adGames) > (best.adWins/best.adGames)  ? player : best
-    );
-  }
-
-  getAdKingWinrate(player: Player){
-    let winrate = ((player.adWins / player.adGames) * 100);
-    return winrate === 100 ? "100" : winrate.toFixed(1);
-  }
-
-  getNormKingWinrate(player: Player){
-    let winrate = (((player.allPickWins + player.captDraftWins + player.randomDraftWins)/(player.allPickGames + player.captDraftGames + player.randomDraftGames))*100);
-    return winrate === 100 ? "100" : winrate.toFixed(1);
-  }
-
-  getRandKingWinrate(player: Player){
-    let winrate = (((player.adarWins + player.allRandomWins + player.singleDraftWins) /
-        (player.adarGames + player.allRandomGames + player.singleDraftGames))*100);
-    return winrate === 100 ? "100" : winrate.toFixed(1);
-  }
-
-  getName(player: Player): string {
-    if (player.steamName === 'Actual Waste of Time') {
-      return `${player.steamName}™`;
+    for (const player of validPlayers) {
+      const score = scoreFn(player) || 0;
+      if (score > topScore) {
+        topScore = score;
+        topPlayers = [player];
+      } else if (score === topScore && score > 0) {
+        topPlayers.push(player);
+      }
     }
-    return player.steamName;
+
+    // If there’s a tie or no top player, return a single dummy player
+    if (topPlayers.length !== 1) return [this.getDummy()];
+
+    return topPlayers;
   }
 
-  getHighlights(players: Player[], matches: Match[]) {
-    const loser = this.getParticipationTrophy(players);
-    const mvp = this.getMvp(players);
-    const degen = this.getDegen(players);
-    const randKing = this.getRandKing(players);
-    const normKing = this.getNormKing(players);
-    const adKing = this.getAdKing(players);
+  getRandKings(players: Player[]): Player[] {
+    return this.getTopPlayers(
+      players,
+      p => (p.adarWins + p.allRandomWins + p.singleDraftWins) /
+           (p.adarGames + p.allRandomGames + p.singleDraftGames),
+      p => (p.adarGames + p.allRandomGames + p.singleDraftGames) > 3
+    );
+  }
+
+  getAdKings(players: Player[]): Player[] {
+    return this.getTopPlayers(
+      players,
+      p => p.adWins / p.adGames,
+      p => p.adGames > 3
+    );
+  }
+
+  getNormKings(players: Player[]): Player[] {
+    return this.getTopPlayers(
+      players,
+      p => (p.allPickWins + p.captDraftWins + p.randomDraftWins) /
+           (p.allPickGames + p.captDraftGames + p.randomDraftGames),
+      p => (p.allPickGames + p.captDraftGames + p.randomDraftGames) > 3
+    );
+  }
+
+  getParticipationTrophy(players: Player[]): Player[] {
+    return this.getTopPlayers(players, p => p.totalLosses || 0);
+  }
+
+  getMvps(players: Player[]): Player[] {
+    return this.getTopPlayers(players, p => p.winRate || 0);
+  }
+
+  getDegens(players: Player[]): Player[] {
+    return this.getTopPlayers(players, p => p.totalGameTime || 0);
+  }
+
+  getAdKingWinrates(players: Player[]): string {
+    const player = players[0];
+    const winrate = ((player.adWins / player.adGames) * 100);
+    return winrate === 100 ? '100' : winrate.toFixed(1);
+  }
+
+  getNormKingWinrates(players: Player[]): string {
+    const player = players[0];
+    const winrate = ((player.allPickWins + player.captDraftWins + player.randomDraftWins) /
+                     (player.allPickGames + player.captDraftGames + player.randomDraftGames) * 100);
+    return winrate === 100 ? '100' : winrate.toFixed(1);
+  }
+
+  getRandKingWinrates(players: Player[]): string {
+    const player = players[0];
+    const winrate = ((player.adarWins + player.allRandomWins + player.singleDraftWins) /
+                     (player.adarGames + player.allRandomGames + player.singleDraftGames) * 100);
+    return winrate === 100 ? '100' : winrate.toFixed(1);
+  }
+
+  getName(players: Player[]): string {
+    const player = players[0];
+    return player.steamName === 'Actual Waste of Time' ? `${player.steamName}™` : player.steamName;
+  }
+
+  getHighlights(players: Player[]) {
+    const losers = this.getParticipationTrophy(players);
+    const mvps = this.getMvps(players);
+    const degens = this.getDegens(players);
+    const randKings = this.getRandKings(players);
+    const normKings = this.getNormKings(players);
+    const adKings = this.getAdKings(players);
 
     return [
       {
         title: 'One True God',
-        profilePic: adKing.profilePictureUrl,
-        subtitle: this.getName(adKing),
+        profilePic: adKings[0].profilePictureUrl,
+        subtitle: this.getName(adKings),
         image: 'assets/images/zeus_god.png',
-        description: `Highest Ability Draft Winrate (${this.getAdKingWinrate(adKing)}%)`
+        description: adKings[0].steamName === 'No Player Yet'
+          ? "Highest Ability Draft Winrate - It's a Tie!"
+          : `Highest Ability Draft Winrate (${this.getAdKingWinrates(adKings)}%)`
       },
       {
         title: 'Can We Play Regular For Once?',
-        profilePic: normKing.profilePictureUrl,
-        subtitle: this.getName(normKing),
+        profilePic: normKings[0].profilePictureUrl,
+        subtitle: this.getName(normKings),
         image: 'assets/images/sven.png',
-        description: `Highest "Regular" Dota Winrate (${this.getNormKingWinrate(normKing)}%)`
+        description: normKings[0].steamName === 'No Player Yet'
+          ? `Highest "Regular" Dota Winrate - It's a Tie!`
+          : `Highest "Regular" Dota Winrate (${this.getNormKingWinrates(normKings)}%)`,
+        subDescription: "All Pick, Captains Draft, Random Draft"
       },
       {
         title: 'Let Chaos Reign!',
-        profilePic: randKing.profilePictureUrl,
-        subtitle: this.getName(randKing),
+        profilePic: randKings[0].profilePictureUrl,
+        subtitle: this.getName(randKings),
         image: 'assets/images/knight.png',
-        description: `Highest "Random" Dota Winrate (${this.getRandKingWinrate(randKing)}%)`
+        description: randKings[0].steamName === 'No Player Yet'
+          ? `Highest "Random" Dota Winrate - It's a Tie!`
+          : `Highest "Random" Dota Winrate (${this.getRandKingWinrates(randKings)}%)`,
+        subDescription: "ADAR, All Random, Single Draft"
       },
       {
         title: 'Thanks For Coming',
-        profilePic: loser.profilePictureUrl,
-        subtitle: this.getName(loser),
+        profilePic: losers[0].profilePictureUrl,
+        subtitle: this.getName(losers),
         image: 'assets/images/heart.png',
-        description: `Most Losses (${loser.totalLosses})`
+        description: losers[0].steamName === 'No Player Yet'
+          ? "Most Losses - It's a Tie!"
+          : `Most Losses (${losers[0].totalLosses})`
       },
       {
         title: 'The Secret Ingredient',
-        profilePic: mvp.profilePictureUrl,
-        subtitle: this.getName(mvp),
+        profilePic: mvps[0].profilePictureUrl,
+        subtitle: this.getName(mvps),
         image: 'assets/images/ingredient.png',
-        description: `Highest Overall Winrate (${mvp.winRate}%)`
+        description: mvps[0].steamName === 'No Player Yet'
+          ? "Highest Overall Winrate - It's a Tie!"
+          : `Highest Overall Winrate (${mvps[0].winRate}%)`
       },
       {
         title: 'What Year Is It?',
-        profilePic: degen.profilePictureUrl,
-        subtitle: this.getName(degen),
+        profilePic: degens[0].profilePictureUrl,
+        subtitle: this.getName(degens),
         image: 'assets/images/timezone.png',
-        description: `Most Game Time (${this.minutesToTimePipe.transform(degen.totalGameTime)})`
+        description: degens[0].steamName === 'No Player Yet'
+          ? "Most Game Time - It's a Tie!"
+          : `Most Game Time (${this.minutesToTimePipe.transform(degens[0].totalGameTime)})`
       }
     ];
   }

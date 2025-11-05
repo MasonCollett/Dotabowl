@@ -68,7 +68,7 @@ export class WelcomeComponent implements OnInit {
     ]).subscribe(([players, matches]) => {
           if (!players.length) players = [this.highlightService.getDummy()];
           if (!matches.length) matches = [this.matchService.getDummyMatch()];
-      this.cards = this.highlightService.getHighlights(players, matches);
+      this.cards = this.highlightService.getHighlights(players);
     });
   }
 }

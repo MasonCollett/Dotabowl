@@ -241,6 +241,20 @@
   transition: background-color 0.25s ease, text-shadow 0.25s ease;
 }
 
+.sub-description-text {
+  color: #fff;             /* keep white for contrast */
+  font-size: 0.80 rem;      /* smaller font size */
+  font-weight: 200;         /* light weight */
+  opacity: 0.7;             /* slightly faded */
+  padding: 1px 4px;
+  border-radius: 8px;
+  text-align: center;
+  
+  text-shadow: 0 0 2px rgba(255, 220, 120, 0.3); /* more subtle */
+  
+  transition: background-color 0.25s ease, text-shadow 0.25s ease;
+}
+
 /* Optional: slightly brighter on hover with card */
 .highlight-card:hover .description-text {
   background-color: rgba(255, 255, 255, 0.12);
