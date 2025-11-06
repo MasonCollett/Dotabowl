@@ -24,7 +24,7 @@ jobs:
           dotnet-version: '9.x'
 
       - name: Build with dotnet
-        run: dotnet build ./dotabowl/Dotabowl.csproj --configuration Release
+        run: dotnet build --configuration Release
 
       - name: dotnet publish
         run: dotnet publish -c Release -o "${{env.DOTNET_ROOT}}/myapp"
@@ -34,7 +34,7 @@ jobs:
         with:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
-          
+
   deploy:
     runs-on: windows-latest
     needs: build
@@ -51,9 +51,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_A7C07D998F3D4A41B4DC1EC6B3153DC1 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_249EE9F33CCC4BB895A58B3F389D3517 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_7FF2BACAAAB8486FAC19EA5C107B3D63 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_FFCDCA61CDEF4E9EA6A623306E57C8C0 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_981FD69B22B2451CA69755AD297CC163 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_E29B61AC3CA24421BA756127C3E61BEB }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -62,10 +62,4 @@ jobs:
           app-name: 'dotabowl-backend'
           slot-name: 'Production'
           package: .
-
           
-
-
-
-
-
